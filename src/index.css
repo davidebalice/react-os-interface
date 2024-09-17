@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  overflow: hidden;
+}
+
+.no-select {
+  user-select: none;
+  pointer-events: none;
+}
+
+.dragIcon {
+  cursor: move;
+}
+
+.bgHover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.helpMessageContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.helpMessage {
+  color: white;
+  padding-top: 8px;
+}
+
+.flexColumn {
+  flex-direction: column;
+}
+
+.content {
+  cursor: pointer;
+}
+
+.black {
+  color: #222;
+}
+
+.loginBg {
+  background: url("./assets/images/bg.jpg") !important;
+  background-size: cover !important;
+}
+
+.demoHome {
+  color: #fff;
+  margin-left: 20px;
+  border: 1px solid #444;
+  padding: 10px 20px;
+  background: #222;
+}
+
+.demoHome b {
+  color: red;
+}
+
+.deselectButton {
+  display: flex;
+  gap: 4px;
+  background: #305e7a;
+  margin-bottom: 10px;
+  color: #fff;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.deselectButton:hover {
+  background: #357095;
+}
+
+.mobileMessage {
+  color: red;
+  font-weight: bold;
+  font-size: 23px;
+  text-align: center;
+  display: none;
+  margin-top: 60px;
+  margin-bottom: 250px;
+  width: 100%;
+}
+
+@media (max-width: 799px) {
+  .mobileMessage {
+    display: block;
+  }
+  .itemContainer {
+    display: none;
+  }
+}
+
+.infoButton {
+  color: #fff;
+  font-size: 40px;
+}
+
+.infoButton:hover {
+  color: #f1f1f1;
+}
+
+.infoContainer {
+  min-height: calc(100vh - 190px);
+}
+
+.info {
+  padding: 30px;
+  color: #fff;
+}
+
+.bottomBar {
+  height: 60px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: #f1f1f1;
+}
+
+.desktop {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background-size: cover !important;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
