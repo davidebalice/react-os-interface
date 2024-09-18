@@ -39,7 +39,6 @@ const Index = () => {
       toast.error(error.response.data.message);
     }
   };
-  //end method
 
   return (
     <div className="bg-[#18191b] min-h-screen w-full loginBg">

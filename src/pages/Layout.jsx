@@ -3,7 +3,7 @@ import { FaInfoCircle } from "react-icons/fa";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import logo from "../assets/images/logoWhite.png";
 import userImg from "../assets/images/user.png";
-import Footer from "../components/Footer";
+import BottomBar from "../components/BottomBar";
 import api from "../utils/api";
 
 const Layout = () => {
@@ -92,7 +92,7 @@ const Layout = () => {
       </div>
 
       <Outlet />
-      <Footer />
+      <BottomBar />
     </div>
   );
 };

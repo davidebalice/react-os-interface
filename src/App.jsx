@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./components/Home";
+import Desktop from "./components/Desktop";
 import Info from "./components/Info";
-import { ComponentsProvider } from "./context/Context";
+import { OsProvider } from "./context/Context";
 import Index from "./pages/Index";
 import Layout from "./pages/Layout";
 import { token_decode } from "./utils/index";
@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: <Desktop />,
       },
       {
         path: "/info",
@@ -27,9 +27,9 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <ComponentsProvider>
+    <OsProvider>
       <RouterProvider router={router} />
-    </ComponentsProvider>
+    </OsProvider>
   );
 }
 

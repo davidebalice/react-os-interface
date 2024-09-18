@@ -118,7 +118,20 @@ body {
   position: fixed;
   bottom: 0;
   left: 0;
-  background-color: #f1f1f1;
+  background-color: #e4effa;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottomSection2{
+  display: flex;
+  gap:10px;
+  align-items: center;
+}
+
+.bottomClock{
+  text-align: right;
+  margin-right: 20px;
 }
 
 .desktop {
@@ -129,3 +142,34 @@ body {
   background-position: center center;
   background-repeat: no-repeat;
 }
+
+.icon{
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  cursor:pointer
+}
+
+.icon img{
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.icon p{
+  font-size: 13px;
+}
+
+
+
+    
+
+
+
+
+
+
+
+
+
