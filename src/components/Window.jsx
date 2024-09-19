@@ -1,18 +1,16 @@
 import { AnimatePresence, motion, useDragControls } from "framer-motion";
 import React, { useRef, useState } from "react";
+import { FiMaximize } from "react-icons/fi";
+import { IoClose } from "react-icons/io5";
 import Explorer from "../components/Explorer";
 import Pc from "../components/Pc";
 import Settings from "../components/Settings";
 import { useOsContext } from "../context/Context";
 
-const Window = ({
-  iconPosition,
-  isOpen,
-  setIsOpen,
-  handleClose,
-  typeWindows,
-}) => {
-  const { setCurrentApp, bg } = useOsContext();
+import PropTypes from "prop-types";
+
+const Window = ({ icon, iconPosition, isOpen, handleClose, typeWindows }) => {
+  const { bg, bringToFront } = useOsContext();
   const [isDraggable, setIsDraggable] = useState(true);
   const [position, setPosition] = useState({
     x: window.innerWidth * 0.1,
@@ -24,14 +22,12 @@ const Window = ({
   const dragControls = useDragControls();
   const modalRef = useRef(null);
 
-  // Funzione per massimizzare la finestra
   const handleMaximize = () => {
     setIsMaximized(true);
     setSize({ width: "100vw", height: "100vh" });
     setPosition({ x: 0, y: 0 });
   };
 
-  // Funzione per ridurre la finestra
   const handleReduce = () => {
     setIsMaximized(false);
     setSize({ width: "80vw", height: "80vh" });
@@ -98,6 +94,9 @@ const Window = ({
       {isOpen && (
         <motion.div
           ref={modalRef}
+          onClick={() => {
+            bringToFront(icon.id);
+          }}
           initial={{
             width: 50,
             height: 50,
@@ -127,7 +126,7 @@ const Window = ({
           style={{
             position: "fixed",
             backgroundColor: "white",
-            zIndex: 100,
+            zIndex: icon.zIndex,
             overflow: "hidden",
             boxSizing: "border-box",
           }}
@@ -144,21 +143,28 @@ const Window = ({
         >
           <motion.div
             onPointerDown={(e) => dragControls.start(e)}
-            className="modal-header"
-            style={{
-              padding: "10px",
-              backgroundColor: "#f0f0f0",
-              cursor: "move",
-              display: "flex",
-              justifyContent: "space-between",
-              zIndex: 101,
-              position: "relative",
-            }}
+            className="window-header"
           >
-            <button onClick={isMaximized ? handleReduce : handleMaximize}>
-              {isMaximized ? "Reduce" : "Maximize"}
-            </button>
-            <button onClick={handleClose}>Close</button>
+            <div className="window-header-icon-container">
+              {icon && (
+                <>
+                  <img src={icon.img} className="window-header-icon" />
+                </>
+              )}
+              <span>{icon && icon.name}</span>
+            </div>
+
+            <div className="window-header-buttons">
+              <button
+                onClick={isMaximized ? handleReduce : handleMaximize}
+                className="window-header-button"
+              >
+                <FiMaximize size={21} className="window-header-icon" />
+              </button>
+              <button onClick={handleClose} className="window-header-button">
+                <IoClose size={28} className="window-header-icon" />
+              </button>
+            </div>
           </motion.div>
 
           <div style={{ padding: "20px", height: "calc(100% - 40px)" }}>
@@ -172,59 +178,6 @@ const Window = ({
           </div>
 
           <div
-            onMouseDown={(e) => handleResize(e, "se")}
-            style={{
-              width: 20,
-              height: 20,
-              backgroundColor: "gray",
-              position: "absolute",
-              bottom: 0,
-              right: 0,
-              cursor: "nwse-resize",
-              zIndex: 101,
-            }}
-          />
-          <div
-            onMouseDown={(e) => handleResize(e, "sw")}
-            style={{
-              width: 20,
-              height: 20,
-              backgroundColor: "gray",
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              cursor: "nesw-resize",
-              zIndex: 101,
-            }}
-          />
-          <div
-            onMouseDown={(e) => handleResize(e, "ne")}
-            style={{
-              width: 20,
-              height: 20,
-              backgroundColor: "gray",
-              position: "absolute",
-              top: 0,
-              right: 0,
-              cursor: "nesw-resize",
-              zIndex: 101,
-            }}
-          />
-          <div
-            onMouseDown={(e) => handleResize(e, "nw")}
-            style={{
-              width: 20,
-              height: 20,
-              backgroundColor: "gray",
-              position: "absolute",
-              top: 0,
-              left: 0,
-              cursor: "nwse-resize",
-              zIndex: 101,
-            }}
-          />
-          {/* Resize edges */}
-          <div
             onMouseDown={(e) => handleResize(e, "e")}
             style={{
               width: 10,
@@ -234,7 +187,7 @@ const Window = ({
               top: 0,
               right: 0,
               cursor: "ew-resize",
-              zIndex: 101,
+              zIndex: icon.zIndex + 1,
             }}
           />
           <div
@@ -247,7 +200,7 @@ const Window = ({
               left: 0,
               top: 0,
               cursor: "ew-resize",
-              zIndex: 1001,
+              zIndex: icon.zIndex + 2,
             }}
           />
           <div
@@ -259,7 +212,7 @@ const Window = ({
               position: "absolute",
               top: 0,
               cursor: "ns-resize",
-              zIndex: 101,
+              zIndex: icon.zIndex + 2,
             }}
           />
           <div
@@ -271,7 +224,7 @@ const Window = ({
               position: "absolute",
               bottom: 0,
               cursor: "ns-resize",
-              zIndex: 101,
+              zIndex: icon.zIndex + 2,
             }}
           />
         </motion.div>
@@ -281,3 +234,74 @@ const Window = ({
 };
 
 export default Window;
+
+/*
+ <div
+            onMouseDown={(e) => handleResize(e, "se")}
+            style={{
+              width: 20,
+              height: 20,
+              backgroundColor: "gray",
+              position: "absolute",
+              bottom: 0,
+              right: 0,
+              cursor: "nwse-resize",
+              zIndex: icon.zIndex+2,
+            }}
+          />
+          <div
+            onMouseDown={(e) => handleResize(e, "sw")}
+            style={{
+              width: 20,
+              height: 20,
+              backgroundColor: "gray",
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              cursor: "nesw-resize",
+              zIndex: icon.zIndex+2,
+            }}
+          />
+          <div
+            onMouseDown={(e) => handleResize(e, "ne")}
+            style={{
+              width: 20,
+              height: 20,
+              backgroundColor: "gray",
+              position: "absolute",
+              top: 0,
+              right: 0,
+              cursor: "nesw-resize",
+              zIndex: icon.zIndex+2,
+            }}
+          />
+          <div
+            onMouseDown={(e) => handleResize(e, "nw")}
+            style={{
+              width: 20,
+              height: 20,
+              backgroundColor: "gray",
+              position: "absolute",
+              top: 0,
+              left: 0,
+              cursor: "nwse-resize",
+              zIndex: icon.zIndex+2,
+            }}
+          />
+*/
+
+Window.propTypes = {
+  icon: PropTypes.shape({
+    img: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    zIndex: PropTypes.number.isRequired,
+    opened: PropTypes.bool.isRequired,
+  }).isRequired,
+  iconPosition: PropTypes.shape({
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
+  }).isRequired,
+  handleClose: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  typeWindows: PropTypes.oneOf(["Explorer", "Pc", "Settings"]).isRequired,
+};

@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from "react";
 import "react-multi-carousel/lib/styles.css";
-import { useNavigate } from "react-router-dom";
 import { useOsContext } from "../context/Context";
-import icons from "../data/icons";
-import Window from "./Window";
 import Icon from "./Icon";
+import Window from "./Window";
 
 const Desktop = () => {
-  const { setCurrentApp, bg } = useOsContext();
+  const { bg, icons, updateIcon, bringToFront } = useOsContext();
   const [openWindows, setOpenWindows] = useState(false);
   const [typeWindows, setTypeWindows] = useState("");
   const [iconPosition, setIconPosition] = useState({ x: 0, y: 0 });
-  const navigate = useNavigate();
+  const [icon, setIcon] = useState(null);
 
+  /*
   const handleIconClick = (icon, event) => {
     const rect = event.target.getBoundingClientRect();
     setIconPosition({ x: rect.left, y: rect.top });
-
+    setIcon(icon);
     switch (icon.name) {
       case "Site":
         window.open("https://www.davidebalice.dev", "_blank");
@@ -39,23 +38,39 @@ const Desktop = () => {
     }
   };
 
-  const handleClose = () => {
-    setOpenWindows(false);
+
+
+  
+
+*/
+
+  const handleIconClick = (iconId, event) => {
+    const rect = event.target.getBoundingClientRect();
+    updateIcon(iconId, {
+      opened: true,
+      position: { x: rect.left, y: rect.top },
+    });
+    bringToFront(iconId.id);
   };
 
-  useEffect(() => {
-    setCurrentApp("");
-  }, []);
+  const handleClose = (iconId) => {
+    updateIcon(iconId, { opened: false });
+  };
+
+  useEffect(() => {}, []);
 
   return (
     <div className="desktop" style={{ background: "url(" + bg + ")" }}>
-      <Window
-        isOpen={openWindows}
-        iconPosition={iconPosition}
-        setIconPosition={setIconPosition}
-        handleClose={handleClose}
-        typeWindows={typeWindows}
-      />
+      {icons.map((icon) => (
+        <Window
+          key={icon.id}
+          icon={icon}
+          isOpen={icon.opened}
+          iconPosition={icon.position}
+          handleClose={() => handleClose(icon)}
+          typeWindows={icon.name}
+        />
+      ))}
 
       <div className="w-full flex justify-start items-center relative rounded-md overflow-hidden itemContainer">
         <div className="demoHome">
