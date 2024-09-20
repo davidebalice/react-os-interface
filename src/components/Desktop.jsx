@@ -1,61 +1,36 @@
-import React, { useEffect, useState } from "react";
-import "react-multi-carousel/lib/styles.css";
+import React, { useEffect } from "react";
 import { useOsContext } from "../context/Context";
 import Icon from "./Icon";
 import Window from "./Window";
 
 const Desktop = () => {
-  const { bg, icons, updateIcon, bringToFront } = useOsContext();
-  const [openWindows, setOpenWindows] = useState(false);
-  const [typeWindows, setTypeWindows] = useState("");
-  const [iconPosition, setIconPosition] = useState({ x: 0, y: 0 });
-  const [icon, setIcon] = useState(null);
+  const { bg, icons, updateIcon, bringToFront, handleMinimize } =
+    useOsContext();
 
-  /*
   const handleIconClick = (icon, event) => {
-    const rect = event.target.getBoundingClientRect();
-    setIconPosition({ x: rect.left, y: rect.top });
-    setIcon(icon);
-    switch (icon.name) {
-      case "Site":
-        window.open("https://www.davidebalice.dev", "_blank");
-        break;
-      case "Pc":
-        setOpenWindows(true);
-        setTypeWindows("Pc");
-        break;
-      case "Explorer":
-        setOpenWindows(true);
-        setTypeWindows("Explorer");
-        break;
-      case "Settings":
-        setOpenWindows(true);
-        setTypeWindows("Settings");
-        break;
-      default:
-        console.log(`Default action for icon: ${icon.name}`);
-        break;
+    if (icon.name == "Site") {
+      window.open("https://www.davidebalice.dev", "_blank");
+    } else {
+      const rect = event.target.getBoundingClientRect();
+
+      updateIcon(icon, {
+        opened: true,
+        position: { x: rect.left, y: rect.top },
+      });
+      bringToFront(icon.id);
+      handleMinimize(icon.id, false);
     }
-  };
-
-
-
-  
-
-*/
-
-  const handleIconClick = (iconId, event) => {
-    const rect = event.target.getBoundingClientRect();
-    updateIcon(iconId, {
-      opened: true,
-      position: { x: rect.left, y: rect.top },
-    });
-    bringToFront(iconId.id);
   };
 
   const handleClose = (iconId) => {
     updateIcon(iconId, { opened: false });
   };
+
+  const handleToMinimize = (iconId) => {
+    updateIcon(iconId, { minimized: true });
+  };
+
+  console.log(icons);
 
   useEffect(() => {}, []);
 
@@ -69,6 +44,7 @@ const Desktop = () => {
           iconPosition={icon.position}
           handleClose={() => handleClose(icon)}
           typeWindows={icon.name}
+          handleMinimize={() => handleToMinimize(icon)}
         />
       ))}
 

@@ -1,11 +1,13 @@
 import React, { createContext, useContext, useState } from "react";
-import bg01 from "../assets/images/bg01.jpg";
+import backgrounds from "../data/backgrounds";
 import windows from "../data/windows";
 
 export const Context = createContext();
 export const useOsContext = () => useContext(Context);
 export const OsProvider = ({ children }) => {
-  const [bg, setBg] = useState(bg01);
+  const [bg, setBg] = useState(
+    backgrounds.find((bg) => bg.id === 1)?.bg || null
+  );
   const [icons, setIcons] = useState(windows);
 
   const updateIcon = (iconId, update) => {
@@ -29,6 +31,15 @@ export const OsProvider = ({ children }) => {
     });
   };
 
+  const handleMinimize = (iconId, minimized) => {
+    setIcons((prevIcons) => {
+      return prevIcons.map((icon) => ({
+        ...icon,
+        minimized: icon.id === iconId ? minimized : icon.minimized,
+      }));
+    });
+  };
+
   return (
     <Context.Provider
       value={{
@@ -36,6 +47,7 @@ export const OsProvider = ({ children }) => {
         setIcons,
         updateIcon,
         bringToFront,
+        handleMinimize,
         bg,
         setBg,
       }}

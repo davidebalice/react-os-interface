@@ -1,5 +1,7 @@
 import { AnimatePresence, motion, useDragControls } from "framer-motion";
+import PropTypes from "prop-types";
 import React, { useRef, useState } from "react";
+import { FaRegWindowMinimize } from "react-icons/fa";
 import { FiMaximize } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 import Explorer from "../components/Explorer";
@@ -7,9 +9,14 @@ import Pc from "../components/Pc";
 import Settings from "../components/Settings";
 import { useOsContext } from "../context/Context";
 
-import PropTypes from "prop-types";
-
-const Window = ({ icon, iconPosition, isOpen, handleClose, typeWindows }) => {
+const Window = ({
+  icon,
+  iconPosition,
+  isOpen,
+  handleClose,
+  typeWindows,
+  handleMinimize,
+}) => {
   const { bg, bringToFront } = useOsContext();
   const [isDraggable, setIsDraggable] = useState(true);
   const [position, setPosition] = useState({
@@ -17,19 +24,19 @@ const Window = ({ icon, iconPosition, isOpen, handleClose, typeWindows }) => {
     y: window.innerHeight * 0.1,
   });
   const [size, setSize] = useState({ width: "80vw", height: "80vh" });
-  const [isMaximized, setIsMaximized] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const dragControls = useDragControls();
   const modalRef = useRef(null);
 
-  const handleMaximize = () => {
-    setIsMaximized(true);
+  const handleExpand = () => {
+    setIsExpanded(true);
     setSize({ width: "100vw", height: "100vh" });
     setPosition({ x: 0, y: 0 });
   };
 
   const handleReduce = () => {
-    setIsMaximized(false);
+    setIsExpanded(false);
     setSize({ width: "80vw", height: "80vh" });
     setPosition({ x: window.innerWidth * 0.1, y: window.innerHeight * 0.1 });
   };
@@ -102,12 +109,14 @@ const Window = ({ icon, iconPosition, isOpen, handleClose, typeWindows }) => {
             height: 50,
             x: iconPosition.x,
             y: iconPosition.y,
+            opacity: 0,
           }}
           animate={{
-            width: size.width,
-            height: size.height,
-            x: position.x,
-            y: position.y,
+            width: icon.minimized ? 100 : size.width,
+            height: icon.minimized ? 40 : size.height,
+            x: icon.minimized ? 10 : position.x,
+            y: icon.minimized ? window.innerHeight - 10 : position.y,
+            opacity: icon.minimized ? 0 : 1,
           }}
           exit={{
             width: 0,
@@ -122,7 +131,7 @@ const Window = ({ icon, iconPosition, isOpen, handleClose, typeWindows }) => {
             stiffness: 300,
             damping: 30,
           }}
-          className="modal"
+          className="window"
           style={{
             position: "fixed",
             backgroundColor: "white",
@@ -155,34 +164,45 @@ const Window = ({ icon, iconPosition, isOpen, handleClose, typeWindows }) => {
             </div>
 
             <div className="window-header-buttons">
+              <button onClick={handleMinimize} className="window-header-button">
+                <FaRegWindowMinimize size={17} className="window-header-icon" />
+              </button>
               <button
-                onClick={isMaximized ? handleReduce : handleMaximize}
+                onClick={isExpanded ? handleReduce : handleExpand}
                 className="window-header-button"
               >
-                <FiMaximize size={21} className="window-header-icon" />
+                <FiMaximize
+                  size={18}
+                  className="window-header-icon window-header-icon-minimize"
+                />
               </button>
               <button onClick={handleClose} className="window-header-button">
-                <IoClose size={28} className="window-header-icon" />
+                <IoClose className="window-header-icon window-header-icon-close" />
               </button>
             </div>
           </motion.div>
 
           <div style={{ padding: "20px", height: "calc(100% - 40px)" }}>
-            {typeWindows === "Explorer" ? (
-              <Explorer handleClose={handleClose} />
-            ) : typeWindows === "Pc" ? (
-              <Pc handleClose={handleClose} />
-            ) : typeWindows === "Settings" ? (
-              <Settings handleClose={handleClose} />
-            ) : null}
+            {(() => {
+              switch (typeWindows) {
+                case "Explorer":
+                  return <Explorer handleClose={handleClose} />;
+                case "Pc":
+                  return <Pc handleClose={handleClose} />;
+                case "Settings":
+                  return <Settings handleClose={handleClose} />;
+                default:
+                  return null;
+              }
+            })()}
           </div>
 
           <div
             onMouseDown={(e) => handleResize(e, "e")}
             style={{
-              width: 10,
+              width: 2,
               height: "100%",
-              backgroundColor: "gray",
+              backgroundColor: "#ddd",
               position: "absolute",
               top: 0,
               right: 0,
@@ -193,9 +213,9 @@ const Window = ({ icon, iconPosition, isOpen, handleClose, typeWindows }) => {
           <div
             onMouseDown={(e) => handleResize(e, "w")}
             style={{
-              width: 10,
+              width: 2,
               height: "100%",
-              backgroundColor: "gray",
+              backgroundColor: "#ddd",
               position: "absolute",
               left: 0,
               top: 0,
@@ -207,8 +227,8 @@ const Window = ({ icon, iconPosition, isOpen, handleClose, typeWindows }) => {
             onMouseDown={(e) => handleResize(e, "n")}
             style={{
               width: "100%",
-              height: 10,
-              backgroundColor: "gray",
+              height: 2,
+              backgroundColor: "#ddd",
               position: "absolute",
               top: 0,
               cursor: "ns-resize",
@@ -219,8 +239,8 @@ const Window = ({ icon, iconPosition, isOpen, handleClose, typeWindows }) => {
             onMouseDown={(e) => handleResize(e, "s")}
             style={{
               width: "100%",
-              height: 10,
-              backgroundColor: "gray",
+              height: 2,
+              backgroundColor: "#ddd",
               position: "absolute",
               bottom: 0,
               cursor: "ns-resize",
@@ -235,61 +255,6 @@ const Window = ({ icon, iconPosition, isOpen, handleClose, typeWindows }) => {
 
 export default Window;
 
-/*
- <div
-            onMouseDown={(e) => handleResize(e, "se")}
-            style={{
-              width: 20,
-              height: 20,
-              backgroundColor: "gray",
-              position: "absolute",
-              bottom: 0,
-              right: 0,
-              cursor: "nwse-resize",
-              zIndex: icon.zIndex+2,
-            }}
-          />
-          <div
-            onMouseDown={(e) => handleResize(e, "sw")}
-            style={{
-              width: 20,
-              height: 20,
-              backgroundColor: "gray",
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              cursor: "nesw-resize",
-              zIndex: icon.zIndex+2,
-            }}
-          />
-          <div
-            onMouseDown={(e) => handleResize(e, "ne")}
-            style={{
-              width: 20,
-              height: 20,
-              backgroundColor: "gray",
-              position: "absolute",
-              top: 0,
-              right: 0,
-              cursor: "nesw-resize",
-              zIndex: icon.zIndex+2,
-            }}
-          />
-          <div
-            onMouseDown={(e) => handleResize(e, "nw")}
-            style={{
-              width: 20,
-              height: 20,
-              backgroundColor: "gray",
-              position: "absolute",
-              top: 0,
-              left: 0,
-              cursor: "nwse-resize",
-              zIndex: icon.zIndex+2,
-            }}
-          />
-*/
-
 Window.propTypes = {
   icon: PropTypes.shape({
     img: PropTypes.string.isRequired,
@@ -303,5 +268,6 @@ Window.propTypes = {
   }).isRequired,
   handleClose: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
+  handleMinimize: PropTypes.bool.isRequired,
   typeWindows: PropTypes.oneOf(["Explorer", "Pc", "Settings"]).isRequired,
 };

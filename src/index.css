@@ -123,10 +123,32 @@ body {
   justify-content: space-between;
 }
 
-.bottomSection2 {
+.bottomSection {
   display: flex;
   gap: 10px;
   align-items: center;
+}
+
+.bottomIcons {
+  display: flex;
+  gap: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.bottomIcon {
+  width: 50px;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.bottomIcon:hover {
+  background: #cddded;
+}
+
+.bottomIcon img {
+  width: 100%;
 }
 
 .bottomClock {
@@ -161,6 +183,12 @@ body {
   font-size: 13px;
 }
 
+.window {
+  box-shadow: 2px 3px 5px 0px rgb(0, 0, 0, 0.30);
+  border-radius: 8px;
+  overflow:hidden;
+}
+
 .window-header {
   padding: 10px;
   background: #f9f9f9;
@@ -179,6 +207,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: end;
+  text-align: center;
   gap: 10px;
 }
 
@@ -205,12 +234,20 @@ body {
   gap: 5px;
 }
 
+.window-header-icon-close {
+  font-size: 36px !important;
+}
+
+.window-header-icon-minimize {
+  margin-top: 8px;
+}
+
 .window-header-icon {
-  width: 18px;
-  margin-left:4px;
+  width: 22px;
+  margin-left: 4px;
 }
 
 .window-header-icon-container span {
   font-size: 14px;
-  margin-top:2px
+  margin-top: 2px;
 }
