@@ -1,10 +1,15 @@
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
+import { useOsContext } from "../context/Context";
 
 const Icon = ({ icon, handleIconClick }) => {
-  const [position, setPosition] = useState({x:icon.position.x, y:icon.position.y});
-  console.log(position.x);
+  const [position, setPosition] = useState({
+    x: icon.position.x,
+    y: icon.position.y,
+  });
+  const { bg } = useOsContext();
+
   return (
     <motion.div
       className="icon"
@@ -18,7 +23,7 @@ const Icon = ({ icon, handleIconClick }) => {
       }}
     >
       <img src={icon.img} alt={"Icon " + icon.name} />
-      <p>{icon.name}</p>
+      <p style={{ color: bg.color }}>{icon.name}</p>
     </motion.div>
   );
 };

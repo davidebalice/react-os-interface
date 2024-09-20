@@ -5,7 +5,7 @@ import { FaRegWindowMinimize } from "react-icons/fa";
 import { FiMaximize } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 import Explorer from "../components/Explorer";
-import Pc from "../components/Pc";
+import Server from "../components/Server";
 import Settings from "../components/Settings";
 import { useOsContext } from "../context/Context";
 
@@ -14,7 +14,6 @@ const Window = ({
   iconPosition,
   isOpen,
   handleClose,
-  typeWindows,
   handleMinimize,
 }) => {
   const { bg, bringToFront } = useOsContext();
@@ -184,12 +183,12 @@ const Window = ({
 
           <div style={{ padding: "20px", height: "calc(100% - 40px)" }}>
             {(() => {
-              switch (typeWindows) {
-                case "Explorer":
+              switch (icon.id) {
+                case 1:
+                  return <Server handleClose={handleClose} />;
+                case 2:
                   return <Explorer handleClose={handleClose} />;
-                case "Pc":
-                  return <Pc handleClose={handleClose} />;
-                case "Settings":
+                case 3:
                   return <Settings handleClose={handleClose} />;
                 default:
                   return null;
@@ -257,6 +256,7 @@ export default Window;
 
 Window.propTypes = {
   icon: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     img: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     zIndex: PropTypes.number.isRequired,
@@ -268,6 +268,5 @@ Window.propTypes = {
   }).isRequired,
   handleClose: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
-  handleMinimize: PropTypes.bool.isRequired,
-  typeWindows: PropTypes.oneOf(["Explorer", "Pc", "Settings"]).isRequired,
+  handleMinimize: PropTypes.func.isRequired,
 };

@@ -6,7 +6,7 @@ export const Context = createContext();
 export const useOsContext = () => useContext(Context);
 export const OsProvider = ({ children }) => {
   const [bg, setBg] = useState(
-    backgrounds.find((bg) => bg.id === 1)?.bg || null
+    backgrounds.find((bg) => bg.id === 1) || null
   );
   const [icons, setIcons] = useState(windows);
 

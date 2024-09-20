@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import Clock from "../components/Clock";
+import Start from "../components/Start";
 import { useOsContext } from "../context/Context";
 
 const BottomBar = () => {
@@ -13,10 +14,20 @@ const BottomBar = () => {
     setOpenedIcons(filteredIcons);
   }, [icons]);
 
+  const handleIconClick = (icon, event) => {
+    const rect = event.target.getBoundingClientRect();
+    updateIcon(icon, {
+      opened: true,
+      position: { x: rect.left, y: rect.top },
+    });
+    bringToFront(icon.id);
+    handleMinimize(icon.id, false);
+  };
+
   return (
     <div className="bottomBar">
       <div className="bottomSection">
-        <div>Start</div>
+        <Start />
         <div className="bottomIcons">
           {openedIcons.map((icon) => (
             <motion.div
@@ -35,6 +46,22 @@ const BottomBar = () => {
       </div>
 
       <div className="bottomSection">
+        {icons.map((icon) => {
+          if (icon.id === 3) {
+            return (
+              <motion.div
+                key={"bottomIcon" + icon.id}
+                className="bottomIcon2"
+                onClick={(event) => handleIconClick(icon, event)}
+                whileHover={{ scale: 1.1 }}
+              >
+                <img src={icon.img} alt={icon.name} />
+              </motion.div>
+            );
+          }
+          return null;
+        })}
+
         <Clock />
       </div>
     </div>

@@ -30,12 +30,10 @@ const Desktop = () => {
     updateIcon(iconId, { minimized: true });
   };
 
-  console.log(icons);
-
   useEffect(() => {}, []);
 
   return (
-    <div className="desktop" style={{ background: "url(" + bg + ")" }}>
+    <div className="desktop" style={{ background: "url(" + bg.bg + ")" }}>
       {icons.map((icon) => (
         <Window
           key={icon.id}
@@ -43,18 +41,9 @@ const Desktop = () => {
           isOpen={icon.opened}
           iconPosition={icon.position}
           handleClose={() => handleClose(icon)}
-          typeWindows={icon.name}
           handleMinimize={() => handleToMinimize(icon)}
         />
       ))}
-
-      <div className="w-full flex justify-start items-center relative rounded-md overflow-hidden itemContainer">
-        <div className="demoHome">
-          <b>Demo Mode</b>
-          <br />
-          Crud operations are not allowed.
-        </div>
-      </div>
 
       <div>
         {icons.map((icon, i) => (
