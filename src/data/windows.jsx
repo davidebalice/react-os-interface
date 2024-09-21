@@ -13,6 +13,7 @@ const windows = [
     zIndex: 100,
     opened: false,
     minimized: false,
+    info: "Select server and access to file system via api. In this demo is possible to connect to only one server."
   },
   {
     id: 2,

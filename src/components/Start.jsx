@@ -54,7 +54,7 @@ const Start = () => {
         }}
         layout
         transition={{
-          duration: 0.5,
+          duration: 1,
           type: "spring",
           stiffness: 300,
           damping: 30,
@@ -68,18 +68,62 @@ const Start = () => {
         </div>
 
         <div>
-          <div className="startUserImgContainer">
+          <motion.div
+            className="startUserImgContainer"
+            initial={{
+              y: 100,
+              opacity: 0,
+            }}
+            animate={{
+              y: 0,
+              opacity: 1,
+            }}
+            exit={{
+              x: 100,
+              opacity: 0,
+            }}
+            layout
+            transition={{
+              duration: 0.5,
+              type: "spring",
+              stiffness: 300,
+              damping: 30,
+              delay: 1,
+            }}
+          >
             <img className="startUserImg" src={userImg} alt="user logo" />
-          </div>
+          </motion.div>
 
           <div className="startUserDataColumn">
-            <div className="startUserData">
+            <motion.div
+              className="startUserData"
+              initial={{
+                y: 100,
+                opacity: 0,
+              }}
+              animate={{
+                y: 0,
+                opacity: 1,
+              }}
+              exit={{
+                x: 100,
+                opacity: 0,
+              }}
+              layout
+              transition={{
+                duration: 0.9,
+                type: "spring",
+                stiffness: 300,
+                damping: 30,
+                delay: 1.3,
+              }}
+            >
               <span className="startUserName">
                 {user && user.name} {user && user.surname}
               </span>
               <br />
               <span className="startUserEmail">{user && user.email}</span>
-            </div>
+            </motion.div>
 
             <div onClick={logout} className="startUserLogout">
               <MdLogout />

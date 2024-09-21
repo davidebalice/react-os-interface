@@ -270,6 +270,28 @@ body {
   margin-top: 2px;
 }
 
+.window-row {
+  display: flex;
+  height:100%;
+}
+
+.window-row {
+  display: flex;
+  position: relative;
+}
+
+.window-row > div:nth-child(1) {
+  height: 100vh;
+  width: 200px;
+  border-right: 1px solid #ddd;
+}
+
+.window-row > div:nth-child(2) {
+  flex: 1 1;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
 .startContainer {
   position: fixed;
   border-radius: 8px;
@@ -412,4 +434,35 @@ body {
 
 .pcItem img {
   width: 100%;
+}
+
+.filesystemRow {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding:10px;
+  transition: background 0.3s;
+  cursor: pointer;
+}
+
+.filesystemRow:hover{
+  background-color: #f9f9f9;
+}
+
+.filesystemName {
+  display: flex;
+  gap: 16px;
+}
+
+.filesystemName img{
+  width:26px
+}
+
+.filesystemRow > div:nth-child(1) {
+  width: 400px;
+  overflow: hidden;
+}
+
+.filesystemRow > div:nth-child(2) {
+
 }

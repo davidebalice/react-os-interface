@@ -1,7 +1,7 @@
 import { AnimatePresence, motion, useDragControls } from "framer-motion";
 import PropTypes from "prop-types";
 import React, { useRef, useState } from "react";
-import { FaRegWindowMinimize } from "react-icons/fa";
+import { FaRegQuestionCircle, FaRegWindowMinimize } from "react-icons/fa";
 import { FiMaximize } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 import Explorer from "../components/Explorer";
@@ -18,6 +18,7 @@ const Window = ({
 }) => {
   const { bg, bringToFront } = useOsContext();
   const [isDraggable, setIsDraggable] = useState(true);
+  const [showHelp, setShowHelp] = useState(false);
   const [position, setPosition] = useState({
     x: window.innerWidth * 0.1,
     y: window.innerHeight * 0.1,
@@ -38,6 +39,10 @@ const Window = ({
     setIsExpanded(false);
     setSize({ width: "80vw", height: "80vh" });
     setPosition({ x: window.innerWidth * 0.1, y: window.innerHeight * 0.1 });
+  };
+
+  const handleInfo = () => {
+    setShowHelp(!showHelp);
   };
 
   const handleResize = (e, direction) => {
@@ -163,6 +168,9 @@ const Window = ({
             </div>
 
             <div className="window-header-buttons">
+              <button onClick={handleInfo} className="window-header-button">
+                <FaRegQuestionCircle size={18} className="window-header-icon" />
+              </button>
               <button onClick={handleMinimize} className="window-header-button">
                 <FaRegWindowMinimize size={17} className="window-header-icon" />
               </button>
@@ -181,20 +189,38 @@ const Window = ({
             </div>
           </motion.div>
 
-          <div style={{ padding: "20px", height: "calc(100% - 40px)" }}>
-            {(() => {
-              switch (icon.id) {
-                case 1:
-                  return <Server handleClose={handleClose} />;
-                case 2:
-                  return <Explorer handleClose={handleClose} />;
-                case 3:
-                  return <Settings handleClose={handleClose} />;
-                default:
-                  return null;
-              }
-            })()}
-          </div>
+          <motion.div
+            onPointerDown={handleInfo}
+            className=""
+            showHelp
+            initial={{
+              height: 0,
+              opacity: 0,
+            }}
+            animate={{
+              height: showHelp ? "100px" : 0,
+              opacity: showHelp ? 1 : 0,
+            }}
+            exit={{
+              width: 0,
+              opacity: 0,
+            }}
+          >
+            <div className="">{icon.info}</div>
+          </motion.div>
+
+          {(() => {
+            switch (icon.id) {
+              case 1:
+                return <Server handleClose={handleClose} />;
+              case 2:
+                return <Explorer handleClose={handleClose} />;
+              case 3:
+                return <Settings handleClose={handleClose} />;
+              default:
+                return null;
+            }
+          })()}
 
           <div
             onMouseDown={(e) => handleResize(e, "e")}
