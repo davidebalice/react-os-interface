@@ -25,6 +25,21 @@ const Window = ({
   });
   const [size, setSize] = useState({ width: "80vw", height: "80vh" });
   const [isExpanded, setIsExpanded] = useState(false);
+  const [timer, setTimer] = useState(null);
+
+  const handleHeaderMouseEnter = () => {
+    setIsDraggable(true);
+    if (timer) {
+      clearTimeout(timer);
+      setTimer(null);
+    }
+  };
+
+  const handleHeaderMouseLeave = () => {
+    setTimer(setTimeout(() => {
+      setIsDraggable(false);
+    }, 500));
+  };
 
   const dragControls = useDragControls();
   const modalRef = useRef(null);
@@ -156,6 +171,8 @@ const Window = ({
         >
           <motion.div
             onPointerDown={(e) => dragControls.start(e)}
+            onMouseEnter={() => handleHeaderMouseEnter()}
+            onMouseLeave={() => handleHeaderMouseLeave()}
             className="window-header"
           >
             <div className="window-header-icon-container">

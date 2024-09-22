@@ -5,10 +5,10 @@ import windows from "../data/windows";
 export const Context = createContext();
 export const useOsContext = () => useContext(Context);
 export const OsProvider = ({ children }) => {
-  const [bg, setBg] = useState(
-    backgrounds.find((bg) => bg.id === 1) || null
-  );
+  const [bg, setBg] = useState(backgrounds.find((bg) => bg.id === 1) || null);
   const [icons, setIcons] = useState(windows);
+  const [brightness, setBrightness] = useState(100);
+  const [filter, setFilter] = useState("");
 
   const updateIcon = (iconId, update) => {
     setIcons((prevIcons) => {
@@ -50,6 +50,10 @@ export const OsProvider = ({ children }) => {
         handleMinimize,
         bg,
         setBg,
+        brightness,
+        setBrightness,
+        filter,
+        setFilter,
       }}
     >
       {children}
