@@ -6,7 +6,7 @@ const config = {
   apiUrlDirectory: "https://node-fs-api.davidebalice.dev/api/checkdir",
   apiUrlDeleteFile: "https://node-fs-api.davidebalice.dev/api/delete",
   apiUrlRenameFile: "https://node-fs-api.davidebalice.dev/api/rename",
-  demoMode: false,
+  demoMode: true,
 };
 
 export default config;

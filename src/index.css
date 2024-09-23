@@ -205,6 +205,9 @@ body {
   box-shadow: 2px 3px 5px 0px rgb(0, 0, 0, 0.3);
   border-radius: 8px;
   overflow: hidden;
+  position: fixed;
+  background-color: white;
+  overflow: hidden;
 }
 
 .window-header {
@@ -272,7 +275,7 @@ body {
 
 .window-row {
   display: flex;
-  height:100%;
+  height: 100%;
 }
 
 .window-row {
@@ -292,7 +295,7 @@ body {
   scrollbar-width: thin;
 }
 
-.window-row-title{
+.window-row-title {
   font-weight: bold;
   font-size: 19px;
   margin-bottom: 40px;
@@ -446,12 +449,14 @@ body {
   display: flex;
   justify-content: start;
   align-items: center;
-  padding:10px;
+  padding: 10px;
   transition: background 0.3s;
   cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-.filesystemRow:hover{
+.filesystemRow:hover {
   background-color: #f9f9f9;
 }
 
@@ -460,8 +465,8 @@ body {
   gap: 16px;
 }
 
-.filesystemName img{
-  width:26px
+.filesystemName img {
+  width: 26px;
 }
 
 .filesystemRow > div:nth-child(1) {
@@ -470,29 +475,103 @@ body {
 }
 
 .filesystemRow > div:nth-child(2) {
-
 }
 
-.backgroundContainer{
+.backgroundContainer {
   display: flex;
-  gap:10px;
+  gap: 20px;
   flex-wrap: wrap;
 }
 
-.bgItem{
-  width:350px;
-  height:220px;
+.bgItem {
+  width: 260px;
+  height: 170px;
   cursor: pointer;
-  transition: opacity 0.4s, shadows 0.4s;
+  transition: filter 0.4s;
+  box-shadow: 2px 2px 6px 1px rgb(0, 0, 0, 0.23);
+  border-radius: 6px;
+  overflow: hidden;
 }
 
-.bgItem:hover{
-  opacity: 0.8;
-  box-shadow: 2px 2px 6px 1px rgb(0, 0, 0,0.23);
+.bgItem:hover {
+  filter: brightness(0.6);
 }
 
 .bgItem img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.filterItem {
+  width: 260px;
+  height: 170px;
+  cursor: pointer;
+  position: relative;
+  transition: filter 0.4s;
+  box-shadow: 2px 2px 6px 1px rgb(0, 0, 0, 0.23);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.filterItem:hover {
+  filter: brightness(0.6);
+}
+
+.filterItem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.filterItem p {
+  width: 260px;
+  height: 30px;
+  color: #fff;
+  text-align: center;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.4);
+  margin-top: -30px;
+}
+
+.fileContent {
+  font-size: 13px;
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  font-family: "Courier New", monospace;
+  white-space: pre-wrap;
+}
+
+.info {
+  font-family: "Courier New", monospace;
+  color: #444;
+}
+
+.demo-modal {
+  width: 400px;
+  height: 180px;
+  position: fixed;
+  z-index: 110;
+  background-color: white;
+  border: 1px solid #ddd;
+  box-shadow: 2px 3px 5px 0px rgb(0, 0, 0, 0.3);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.demo-modal-header{
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding:6px
+}
+
+.demo-modal-icon-close{
+  font-size:24px
 }

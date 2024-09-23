@@ -4,7 +4,7 @@ import Icon from "./Icon";
 import Window from "./Window";
 
 const Desktop = () => {
-  const { bg, icons, updateIcon, bringToFront, handleMinimize } =
+  const { bg, icons, updateIcon, setIcons, bringToFront, handleMinimize } =
     useOsContext();
 
   const handleIconClick = (icon, event) => {
@@ -23,7 +23,13 @@ const Desktop = () => {
   };
 
   const handleClose = (iconId) => {
+
     updateIcon(iconId, { opened: false });
+  
+    const windowToClose = icons.find(window => window.id === iconId.id);
+    if (windowToClose && windowToClose.type === 'file') {
+      setIcons(icons.filter(window => window.id !== iconId.id));
+    }
   };
 
   const handleToMinimize = (iconId) => {

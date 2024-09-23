@@ -1,17 +1,45 @@
 import React, { useState } from "react";
+import { FaImage } from "react-icons/fa";
+import { MdAccountCircle } from "react-icons/md";
+import { LuView } from "react-icons/lu";
 import { useOsContext } from "../context/Context";
 import backgrounds from "../data/backgrounds";
+import Profile from "./Profile";
 
 const Settings = () => {
-  const { setBg, setBrightness, setFilter, brightness, filter } = useOsContext();
+  const { setBg } = useOsContext();
   const [settingsSection, setSettingsSection] = useState("bg");
+  const [brightness, setBrightness] = useState(1);
+  const [contrast, setContrast] = useState(1);
+  const [filter, setFilter] = useState("");
 
   const handleBrightnessChange = (e) => {
-    setBrightness(e.target.value);
+    const newBrightness = e.target.value;
+    setBrightness(newBrightness);
+    document.body.style.filter = `brightness(${newBrightness}) contrast(${contrast}) ${filter}`;
   };
 
-  const handleFilterChange = (e) => {
-    setFilter(e.target.value);
+  const handleContrastChange = (e) => {
+    const newContrast = e.target.value;
+    setContrast(newContrast);
+    document.body.style.filter = `brightness(${brightness}) contrast(${newContrast}) ${filter}`;
+  };
+
+  const handleFilterChange = (newFilter) => {
+    const brightnessMatch = newFilter.match(/brightness\(([^)]+)\)/);
+    if (brightnessMatch) {
+      const newBrightness = brightnessMatch[1];
+      setBrightness(newBrightness);
+    }
+
+    const contrastMatch = newFilter.match(/contrast\(([^)]+)\)/);
+    if (contrastMatch) {
+      const newContrast = contrastMatch[1];
+      setContrast(newContrast);
+    }
+
+    setFilter(newFilter);
+    document.body.style.filter = newFilter;
   };
 
   const renderSection = () => {
@@ -38,40 +66,160 @@ const Settings = () => {
         return (
           <>
             <div className="window-row-title">Visualization</div>
-            <div className="backgroundContainer">
-              <div
-                className="app"
-                style={{
-                  filter: `brightness(${brightness}%) ${filter}`,
-                  transition: "filter 0.3s ease",
-                }}
-              >
-                <div className="controls">
-                  <label>Luminosità</label>
-                  <input
-                    type="range"
-                    min="0"
-                    max="200"
-                    value={brightness}
-                    onChange={handleBrightnessChange}
-                  />
+            <div>
+              <b>Brightness</b>
+              <br />
+              <br />
+              <input
+                type="range"
+                min="0.3"
+                max="2"
+                step="0.01"
+                value={brightness}
+                onChange={handleBrightnessChange}
+                style={{ width: "90%" }}
+              />
 
-                  <label>Filtri</label>
-                  <select value={filter} onChange={handleFilterChange}>
-                    <option value="">Nessuno</option>
-                    <option value="contrast(150%)">Contrasto</option>
-                    <option value="grayscale(100%)">Scala di grigi</option>
-                    <option value="sepia(100%)">Seppia</option>
-                    <option value="blur(5px)">Sfocatura</option>
-                  </select>
+              <br />
+              <br />
+
+              <b>Contrast</b>
+              <br />
+              <br />
+              <input
+                type="range"
+                min="0.3"
+                max="2"
+                step="0.01"
+                value={contrast}
+                onChange={handleContrastChange}
+                style={{ width: "90%" }}
+              />
+
+              <br />
+              <br />
+
+              <b>Filter</b>
+
+              <br />
+              <br />
+
+              <div className="backgroundContainer">
+                <div
+                  className="filterItem"
+                  onClick={() =>
+                    handleFilterChange(
+                      "brightness(1) contrast(1) grayscale(0) sepia(0)"
+                    )
+                  }
+                >
+                  <img
+                    src={backgrounds[0].bg}
+                    style={{
+                      filter: "brightness(1) contrast(1) grayscale(0) sepia(0)",
+                    }}
+                  />
+                  <p>Normal</p>
                 </div>
-                <div className="content">
-                  {/* Contenuto della tua app */}
-                  <h1>La mia App</h1>
-                  <p>Modifica la luminosità e aggiungi filtri!</p>
+
+                <div
+                  className="filterItem"
+                  onClick={() =>
+                    handleFilterChange(
+                      "brightness(1.2) contrast(1) grayscale(0) sepia(0)"
+                    )
+                  }
+                >
+                  <img
+                    src={backgrounds[0].bg}
+                    style={{
+                      filter:
+                        "brightness(1.2) contrast(1) grayscale(0) sepia(0)",
+                    }}
+                  />
+                  <p>Bright</p>
+                </div>
+
+                <div
+                  className="filterItem"
+                  onClick={() =>
+                    handleFilterChange(
+                      "brightness(1) contrast(1) grayscale(0.3) sepia(0.4)"
+                    )
+                  }
+                >
+                  <img
+                    src={backgrounds[0].bg}
+                    style={{
+                      filter:
+                        "brightness(1) contrast(1) grayscale(0.3) sepia(0.4)",
+                    }}
+                  />
+                  <p>Vintage</p>
+                </div>
+
+                <div
+                  className="filterItem"
+                  onClick={() =>
+                    handleFilterChange(
+                      "brightness(1) contrast(1.5) grayscale(0) sepia(0)"
+                    )
+                  }
+                >
+                  <img
+                    src={backgrounds[0].bg}
+                    style={{
+                      filter:
+                        "brightness(1) contrast(1.5) grayscale(0) sepia(0)",
+                    }}
+                  />
+                  <p>High contrast</p>
+                </div>
+
+                <div
+                  className="filterItem"
+                  onClick={() =>
+                    handleFilterChange(
+                      "brightness(1) contrast(1) grayscale(1) sepia(0)"
+                    )
+                  }
+                >
+                  <img
+                    src={backgrounds[0].bg}
+                    style={{
+                      filter: "brightness(1) contrast(1) grayscale(1) sepia(0)",
+                    }}
+                  />
+                  <p>Grayscale</p>
+                </div>
+
+                <div
+                  className="filterItem"
+                  onClick={() =>
+                    handleFilterChange(
+                      "brightness(1) contrast(1) grayscale(0) sepia(1)"
+                    )
+                  }
+                >
+                  <img
+                    src={backgrounds[0].bg}
+                    style={{
+                      filter: "brightness(1) contrast(1) grayscale(0) sepia(1)",
+                    }}
+                  />
+                  <p>Sepia</p>
                 </div>
               </div>
+
+              <br />
             </div>
+          </>
+        );
+      case "account":
+        return (
+          <>
+            <div className="window-row-title">Account</div>
+            <Profile />
           </>
         );
 
@@ -84,8 +232,20 @@ const Settings = () => {
     <>
       <div className="window-row">
         <div>
-          <div onClick={() => setSettingsSection("bg")}>Backgrounds</div>
-          <div onClick={() => setSettingsSection("view")}>Visualization</div>
+          <div onClick={() => setSettingsSection("bg")}>
+            <FaImage />
+            Backgrounds
+          </div>
+
+          <div onClick={() => setSettingsSection("view")}>
+            <LuView />
+            Visualization
+          </div>
+
+          <div onClick={() => setSettingsSection("account")}>
+            <MdAccountCircle />
+            Account
+          </div>
         </div>
         <div style={{ padding: "20px", paddingTop: "40px" }}>
           {renderSection()}

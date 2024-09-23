@@ -8,8 +8,8 @@ import api from "../utils/api";
 
 const Start = () => {
   const [show, setShow] = useState(false);
-  const [user, setUser] = useState(null);
-  const { bg, icons, updateIcon, bringToFront, handleMinimize } =
+ 
+  const { bg, icons, updateIcon, bringToFront, handleMinimize, user, setUser } =
     useOsContext();
 
   useEffect(() => {
@@ -75,8 +75,8 @@ const Start = () => {
               opacity: 0,
             }}
             animate={{
-              y: 0,
-              opacity: 1,
+              y: show ? 0 : 100,
+              opacity: show ? 1 : 0,
             }}
             exit={{
               x: 100,
@@ -88,7 +88,7 @@ const Start = () => {
               type: "spring",
               stiffness: 300,
               damping: 30,
-              delay: 1,
+              delay: 0.2
             }}
           >
             <img className="startUserImg" src={userImg} alt="user logo" />
@@ -98,16 +98,16 @@ const Start = () => {
             <motion.div
               className="startUserData"
               initial={{
-                y: 100,
-                opacity: 0,
+                y: show ? 100 : 1,
+                opacity: show ? 0 : 1,
               }}
               animate={{
-                y: 0,
-                opacity: 1,
+                y: show ? 0 : 100,
+                opacity: show ? 1 : 0,
               }}
               exit={{
-                x: 100,
-                opacity: 0,
+                y: show ? 100 : 1,
+                opacity: show ? 0 : 1,
               }}
               layout
               transition={{
@@ -115,7 +115,7 @@ const Start = () => {
                 type: "spring",
                 stiffness: 300,
                 damping: 30,
-                delay: 1.3,
+                delay: 0.5,
               }}
             >
               <span className="startUserName">

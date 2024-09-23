@@ -13,7 +13,8 @@ const windows = [
     zIndex: 100,
     opened: false,
     minimized: false,
-    info: "Select server and access to file system via api. In this demo is possible to connect to only one server."
+    info: "Select server and access to file system via api. In this demo is possible to connect to only one server.",
+    type: "app"
   },
   {
     id: 2,
@@ -23,6 +24,8 @@ const windows = [
     zIndex: 100,
     opened: false,
     minimized: false,
+    info: "",
+    type: "app"
   },
   {
     id: 3,
@@ -32,6 +35,8 @@ const windows = [
     zIndex: 100,
     opened: false,
     minimized: false,
+    info: "",
+    type: "app"
   },
   {
     id: 4,
@@ -41,6 +46,8 @@ const windows = [
     zIndex: 100,
     opened: false,
     minimized: false,
+    info: "",
+    type: "app"
   },
   {
     id: 5,
@@ -50,6 +57,8 @@ const windows = [
     zIndex: 100,
     opened: false,
     minimized: false,
+    info: "",
+    type: "app"
   },
 ];
 

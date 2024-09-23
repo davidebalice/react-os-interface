@@ -2,32 +2,41 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import dirImg from "../assets/icons/explorer.png";
 import fileImg from "../assets/icons/file.png";
+import note from "../assets/icons/note.png";
 import config from "../config";
 import { useOsContext } from "../context/Context";
 
-/*
-const config = {
-  apiUrl: "https://node-fs-api.davidebalice.dev/",
-  apiUrlFiles: "https://node-fs-api.davidebalice.dev/api/files",
-  apiUrlFile: "https://node-fs-api.davidebalice.dev/api/file",
-  apiUrlNewFile: "https://node-fs-api.davidebalice.dev/api/newfile",
-  apiUrlDirectory: "https://node-fs-api.davidebalice.dev/api/checkdir",
-  apiUrlDeleteFile: "https://node-fs-api.davidebalice.dev/api/delete",
-  apiUrlRenameFile: "https://node-fs-api.davidebalice.dev/api/rename",
-  demoMode: false,
-};
-
-export default config;
-*/
-
 const Explorer = () => {
-  const { bg } = useOsContext();
+  const { bg,icons,setIcons } = useOsContext();
   const [fileList, setFileList] = useState([]);
   const [currentDirectory, setCurrentDirectory] = useState([]);
+  const [windows, setWindows] = useState(icons);
 
   const getTokenFromStorage = () => {
     return localStorage.getItem("token");
   };
+
+  const calculateNextPosition = (windows) => {
+    const xStep = 70;
+    const yStep = 0;
+    
+    const maxPosition = windows.reduce(
+      (acc, window) => {
+        acc.maxX = Math.max(acc.maxX, window.position.x);
+        acc.maxY = Math.max(acc.maxY, window.position.y);
+        return acc;
+      },
+      { maxX: 0, maxY: 0 }
+    );
+  
+    const nextPosition = {
+      x: maxPosition.maxX + xStep,
+      y: maxPosition.maxY + yStep,
+    };
+  
+    return nextPosition;
+  };
+  
 
   const ls = async () => {
     const token = getTokenFromStorage();
@@ -82,6 +91,37 @@ const Explorer = () => {
     }
   };
 
+  const file = async (filename) => {
+    const token = getTokenFromStorage();
+    const newPosition = calculateNextPosition(icons);
+      await axios
+        .get(config.apiUrlFile, {
+          params: { dir: currentDirectory, filename: filename },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          const newWindow = {
+            id: Date.now(),
+            name: filename,
+            img: note,
+            position: newPosition,
+            zIndex: 160,
+            opened: true,
+            minimized: false,
+            content: response.data.content,
+            info:"",
+            type:"file"
+          };
+          setIcons((prevIcons) => [...prevIcons, newWindow]);
+        })
+        .catch((error) => {
+        
+        });
+    
+  };
+
   return (
     <>
       <div className="window-row">
@@ -120,7 +160,7 @@ const Explorer = () => {
                     {item.type === "directory" ? (
                       <span>{item.name}</span>
                     ) : (
-                      <span>{item.name}</span>
+                      <span onDoubleClick={()=>file(item.name)}>{item.name}</span>
                     )}
                   </div>
                 </div>
@@ -200,38 +240,6 @@ const useCommands = (
   
 
 
-  const file = async () => {
-    const token = getTokenFromStorage();
-    triggerUpdate();
-    const verifyFile = sessionStorage.getItem("file");
-
-    if (verifyFile !== null && !notAllowedString.includes(verifyFile)) {
-      let directory = sessionStorage.getItem("directory");
-
-      await axios
-        .get(apiUrlFile, {
-          params: { dir: directory, filename: verifyFile },
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          console.log("Response:", response.data);
-          openModalWithData(response.data.content, response.data.title, false);
-        })
-        .catch((error) => {
-          pushToHistory(
-            <>
-              <div>
-                <span style={{ color: "red" }}>
-                  <strong>file not found</strong>
-                </span>
-              </div>
-            </>
-          );
-        });
-    }
-  };
 
   const edit = async () => {
     const token = getTokenFromStorage();

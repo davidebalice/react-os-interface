@@ -5,6 +5,7 @@ import { FaRegQuestionCircle, FaRegWindowMinimize } from "react-icons/fa";
 import { FiMaximize } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 import Explorer from "../components/Explorer";
+import Info from "../components/Info";
 import Server from "../components/Server";
 import Settings from "../components/Settings";
 import { useOsContext } from "../context/Context";
@@ -36,9 +37,11 @@ const Window = ({
   };
 
   const handleHeaderMouseLeave = () => {
-    setTimer(setTimeout(() => {
-      setIsDraggable(false);
-    }, 500));
+    setTimer(
+      setTimeout(() => {
+        setIsDraggable(false);
+      }, 300)
+    );
   };
 
   const dragControls = useDragControls();
@@ -152,11 +155,7 @@ const Window = ({
           }}
           className="window"
           style={{
-            position: "fixed",
-            backgroundColor: "white",
             zIndex: icon.zIndex,
-            overflow: "hidden",
-            boxSizing: "border-box",
           }}
           drag={isDraggable}
           dragControls={dragControls}
@@ -184,10 +183,22 @@ const Window = ({
               <span>{icon && icon.name}</span>
             </div>
 
+            <div
+              style={{ flex: 1, height: "28px" }}
+              onDoubleClick={isExpanded ? handleReduce : handleExpand}
+            >
+              {" "}
+            </div>
+
             <div className="window-header-buttons">
-              <button onClick={handleInfo} className="window-header-button">
-                <FaRegQuestionCircle size={18} className="window-header-icon" />
-              </button>
+              {icon.info !== null && icon.info !== "" && (
+                <button onClick={handleInfo} className="window-header-button">
+                  <FaRegQuestionCircle
+                    size={18}
+                    className="window-header-icon"
+                  />
+                </button>
+              )}
               <button onClick={handleMinimize} className="window-header-button">
                 <FaRegWindowMinimize size={17} className="window-header-icon" />
               </button>
@@ -200,6 +211,7 @@ const Window = ({
                   className="window-header-icon window-header-icon-minimize"
                 />
               </button>
+
               <button onClick={handleClose} className="window-header-button">
                 <IoClose className="window-header-icon window-header-icon-close" />
               </button>
@@ -234,10 +246,16 @@ const Window = ({
                 return <Explorer handleClose={handleClose} />;
               case 3:
                 return <Settings handleClose={handleClose} />;
+              case 5:
+                return <Info handleClose={handleClose} />;
               default:
                 return null;
             }
           })()}
+
+          {icon.content !== "" && (
+            <pre className="fileContent">{icon.content}</pre>
+          )}
 
           <div
             onMouseDown={(e) => handleResize(e, "e")}
