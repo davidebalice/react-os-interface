@@ -10,9 +10,13 @@ const Desktop = () => {
   const handleIconClick = (icon, event) => {
     if (icon.name == "Site") {
       window.open("https://www.davidebalice.dev", "_blank");
+    } else if (icon.name == "Github") {
+      window.open(
+        "https://github.com/davidebalice/react-os-interface",
+        "_blank"
+      );
     } else {
       const rect = event.target.getBoundingClientRect();
-
       updateIcon(icon, {
         opened: true,
         position: { x: rect.left, y: rect.top },
@@ -23,12 +27,11 @@ const Desktop = () => {
   };
 
   const handleClose = (iconId) => {
-
     updateIcon(iconId, { opened: false });
-  
-    const windowToClose = icons.find(window => window.id === iconId.id);
-    if (windowToClose && windowToClose.type === 'file') {
-      setIcons(icons.filter(window => window.id !== iconId.id));
+
+    const windowToClose = icons.find((window) => window.id === iconId.id);
+    if (windowToClose && windowToClose.type === "file") {
+      setIcons(icons.filter((window) => window.id !== iconId.id));
     }
   };
 
@@ -52,13 +55,15 @@ const Desktop = () => {
       ))}
 
       <div>
-        {icons.map((icon, i) => (
-          <Icon
-            icon={icon}
-            key={"icon" + i}
-            handleIconClick={(event) => handleIconClick(icon, event)}
-          />
-        ))}
+        {icons
+          .filter((icon) => icon.type === "app")
+          .map((icon, i) => (
+            <Icon
+              icon={icon}
+              key={"icon" + i}
+              handleIconClick={(event) => handleIconClick(icon, event)}
+            />
+          ))}
       </div>
     </div>
   );

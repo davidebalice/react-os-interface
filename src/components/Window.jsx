@@ -4,6 +4,7 @@ import React, { useRef, useState } from "react";
 import { FaRegQuestionCircle, FaRegWindowMinimize } from "react-icons/fa";
 import { FiMaximize } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
+import Browser from "../components/Browser";
 import Explorer from "../components/Explorer";
 import Info from "../components/Info";
 import Server from "../components/Server";
@@ -17,14 +18,24 @@ const Window = ({
   handleClose,
   handleMinimize,
 }) => {
-  const { bg, bringToFront } = useOsContext();
+  const { bringToFront } = useOsContext();
   const [isDraggable, setIsDraggable] = useState(true);
   const [showHelp, setShowHelp] = useState(false);
   const [position, setPosition] = useState({
     x: window.innerWidth * 0.1,
     y: window.innerHeight * 0.1,
   });
-  const [size, setSize] = useState({ width: "80vw", height: "80vh" });
+
+  const [size, setSize] = useState(() => {
+    if (icon.type === "app") {
+      return { width: "80vw", height: "80vh" };
+    } else if (icon.type === "file") {
+      return { width: "60vw", height: "60vh" };
+    } else {
+      return { width: "80vw", height: "80vh" };
+    }
+  });
+
   const [isExpanded, setIsExpanded] = useState(false);
   const [timer, setTimer] = useState(null);
 
@@ -56,6 +67,13 @@ const Window = ({
   const handleReduce = () => {
     setIsExpanded(false);
     setSize({ width: "80vw", height: "80vh" });
+
+    if (icon.type === "app") {
+      setSize({ width: "80vw", height: "80vh" });
+    } else if (icon.type === "file") {
+      setSize({ width: "60vw", height: "60vh" });
+    }
+
     setPosition({ x: window.innerWidth * 0.1, y: window.innerHeight * 0.1 });
   };
 
@@ -248,6 +266,8 @@ const Window = ({
                 return <Settings handleClose={handleClose} />;
               case 5:
                 return <Info handleClose={handleClose} />;
+              case 6:
+                return <Browser handleClose={handleClose} />;
               default:
                 return null;
             }
@@ -320,8 +340,12 @@ Window.propTypes = {
     id: PropTypes.number.isRequired,
     img: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    content: PropTypes.string,
+    info: PropTypes.string,
     zIndex: PropTypes.number.isRequired,
     opened: PropTypes.bool.isRequired,
+    minimized: PropTypes.bool.isRequired,
+    type: PropTypes.string.isRequired,
   }).isRequired,
   iconPosition: PropTypes.shape({
     x: PropTypes.number.isRequired,

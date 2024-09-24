@@ -311,7 +311,6 @@ body {
   bottom: 70px;
   transition: opacity 0.4s;
   box-shadow: 0px -1px 6px 0px rgb(0, 0, 0, 0.46);
-  z-index: 1;
   display: flex;
 }
 
@@ -564,14 +563,78 @@ body {
   text-align: center;
 }
 
-.demo-modal-header{
+.demo-modal-header {
   background-color: #f9f9f9;
   display: flex;
   justify-content: end;
   align-items: center;
-  padding:6px
+  padding: 6px;
 }
 
-.demo-modal-icon-close{
-  font-size:24px
+.demo-modal-icon-close {
+  font-size: 24px;
+}
+
+.browser {
+  position: relative;
+  height: 100%;
+  scrollbar-width: thin;
+}
+
+.browser iframe {
+  width: 100%;
+  height: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+
+.browser input{
+  background-color: #edf2fa;
+  flex:1;
+  padding:5px 15px;
+  border-radius: 50px;
+}
+
+.browserTopbar {
+  background: #fff;
+  padding: 6px;
+  display: flex;
+  border-bottom: 1px solid #ddd;
+}
+
+.favorites{
+  width:114px;
+  display: flex;
+  gap:8px;
+  cursor: pointer;
+  padding:3px 10px;
+  align-items: center;
+}
+
+.favorites:hover{
+  background-color: #edf2fa;
+}
+
+.blank{
+  width:60px;
+}
+
+.topButton{
+  padding: 5px 7px;
+  margin-left: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.topButton:hover{
+  background-color: #edf2fa;
+}
+
+.favoritesContainer {
+  position: absolute;
+  right: 16px;
+  margin-top: -1px;
+  background-color: #fff;
+  width: 300px;
+  height: 700px;
 }
