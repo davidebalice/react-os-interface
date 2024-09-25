@@ -39,6 +39,10 @@ function Browser() {
     setShowFavorites(!showFavorites);
   };
 
+  const handleHome = () => {
+    setUrl("https://www.davidebalice.dev");
+  };
+
   return (
     <div className="browser">
       <div className="browserTopbar">
@@ -47,15 +51,15 @@ function Browser() {
           disabled={currentIndex === 0}
           className="topButton"
         >
-          <IoMdArrowRoundBack size={20} />
+          <IoMdArrowRoundBack size={20} style={{color: currentIndex === 0 ? "#e1e1e1" : "#333"}}/>
         </button>
 
         <button
-          onClick={handleBackClick}
+          onClick={handleHome}
           disabled={currentIndex === 0}
           className="topButton"
         >
-          <IoMdHome size={20} />
+          <IoMdHome size={20} style={{color: currentIndex === 0 ? "#e1e1e1" : "#333"}} />
         </button>
 
         <input

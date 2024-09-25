@@ -1,0 +1,125 @@
+@import url("https://fonts.googleapis.com/css2?family=Lora&family=Montserrat:wght@300&display=swap");
+
+.dataContainer {
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  text-align: center;
+  line-height: 30px;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+  gap: 20px;
+  padding: 50px 0;
+  outline-offset: 1.2rem;
+  border-radius: 6px;
+  background: url("../../assets/images/weather.jpg");
+  background-size: cover;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.dataContainer {
+  font-size: 19px;
+}
+
+@media screen and (max-width: 1600px) {
+  .dataContainer {
+    width: 90%;
+  }
+}
+
+.date {
+  font-size: 14px;
+}
+
+.minMax {
+  font-size: 14px !important;
+}
+
+.inputContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.weather-input {
+  font-family: inherit;
+  color: #333;
+  font-size: 18px;
+  background-color: #fff;
+  padding: 6px 12px;
+  border: none;
+  width: 220px;
+}
+
+.weather-input:focus {
+  outline: 2px solid #222;
+}
+
+.weather-select {
+  font-family: inherit;
+  color: #333;
+  font-size: 18px;
+  background-color: #fff;
+  padding: 8px 12px;
+  border: none;
+  width: 250px;
+}
+
+.weather-select:focus {
+  outline: 2px solid #222;
+}
+
+.weather-button {
+  background: #222;
+  border: none;
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 6px 12px;
+  border: 1px solid #222;
+  cursor: pointer;
+}
+
+.weather-button:hover {
+  background: #555;
+}
+
+.error {
+  color: red;
+  margin-top: 20px;
+}
+
+.weather {
+  list-style: none;
+  display: flex;
+  gap: 2.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.dayCard {
+  background-color: #fff;
+  color: #333;
+  padding: 1.6rem 0 2rem;
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  cursor: pointer;
+  box-shadow: 2px 2px 6px 0px rgb(0, 0, 0, 0.42);
+}
+
+.dayCard span {
+  font-size: 50px;
+}
+
+.dayCard.important {
+  background-color: #ecc5c0;
+  outline: 2px solid #222;
+}

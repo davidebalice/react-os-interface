@@ -62,7 +62,7 @@ const Info = () => {
          
           Through its <b>Explorer</b>  window, the app communicates with a server via <b>API</b>, allowing users to access the file system and browse the source code of various projects.
           <br /><br />
-          This App is in <b>Demo Mode</b>, Explorer is only read. Write, update and delete files adn directory is not allowed. 
+          This App is in <b>Demo Mode</b>, Explorer is only read. Write, update and delete files/directory are not allowed. 
 
 
 

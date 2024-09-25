@@ -5,11 +5,14 @@ import { FaRegQuestionCircle, FaRegWindowMinimize } from "react-icons/fa";
 import { FiMaximize } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 import Browser from "../components/Browser";
+import Calculator from "../components/Calculator";
 import Explorer from "../components/Explorer";
 import Info from "../components/Info";
 import Server from "../components/Server";
 import Settings from "../components/Settings";
+import Weather from "../components/weather/Weather";
 import { useOsContext } from "../context/Context";
+import CodeEditor from "./CodeEditor";
 
 const Window = ({
   icon,
@@ -28,7 +31,14 @@ const Window = ({
 
   const [size, setSize] = useState(() => {
     if (icon.type === "app") {
-      return { width: "80vw", height: "80vh" };
+      if (icon.personalizedSize) {
+        return {
+          width: icon.personalizedSize.width,
+          height: icon.personalizedSize.height,
+        };
+      } else {
+        return { width: "80vw", height: "80vh" };
+      }
     } else if (icon.type === "file") {
       return { width: "60vw", height: "60vh" };
     } else {
@@ -69,7 +79,14 @@ const Window = ({
     setSize({ width: "80vw", height: "80vh" });
 
     if (icon.type === "app") {
-      setSize({ width: "80vw", height: "80vh" });
+      if (icon.personalizedSize) {
+        setSize({
+          width: icon.personalizedSize.width,
+          height: icon.personalizedSize.height,
+        });
+      } else {
+        setSize({ width: "80vw", height: "80vh" });
+      }
     } else if (icon.type === "file") {
       setSize({ width: "60vw", height: "60vh" });
     }
@@ -259,15 +276,21 @@ const Window = ({
           {(() => {
             switch (icon.id) {
               case 1:
-                return <Server handleClose={handleClose} />;
+                return <Server />;
               case 2:
-                return <Explorer handleClose={handleClose} />;
+                return <Explorer />;
               case 3:
-                return <Settings handleClose={handleClose} />;
+                return <Settings />;
               case 5:
-                return <Info handleClose={handleClose} />;
+                return <Info />;
               case 6:
-                return <Browser handleClose={handleClose} />;
+                return <Browser />;
+              case 8:
+                return <Calculator />;
+              case 9:
+                return <Weather />;
+              case 10:
+                return <CodeEditor />;
               default:
                 return null;
             }
@@ -346,11 +369,16 @@ Window.propTypes = {
     opened: PropTypes.bool.isRequired,
     minimized: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
+    personalizedSize: PropTypes.shape({
+      width: PropTypes.string,
+      height: PropTypes.string,
+    }),
   }).isRequired,
   iconPosition: PropTypes.shape({
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
   }).isRequired,
+
   handleClose: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   handleMinimize: PropTypes.func.isRequired,
