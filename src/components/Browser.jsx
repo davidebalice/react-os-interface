@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { FaCaretRight } from "react-icons/fa6";
 import { IoMdArrowRoundBack, IoMdHome } from "react-icons/io";
+import favorites from "../data/favorites";
 
 function Browser() {
   const [url, setUrl] = useState("https://www.davidebalice.dev");
@@ -51,7 +52,10 @@ function Browser() {
           disabled={currentIndex === 0}
           className="topButton"
         >
-          <IoMdArrowRoundBack size={20} style={{color: currentIndex === 0 ? "#e1e1e1" : "#333"}}/>
+          <IoMdArrowRoundBack
+            size={20}
+            style={{ color: currentIndex === 0 ? "#e1e1e1" : "#333" }}
+          />
         </button>
 
         <button
@@ -59,7 +63,10 @@ function Browser() {
           disabled={currentIndex === 0}
           className="topButton"
         >
-          <IoMdHome size={20} style={{color: currentIndex === 0 ? "#e1e1e1" : "#333"}} />
+          <IoMdHome
+            size={20}
+            style={{ color: currentIndex === 0 ? "#e1e1e1" : "#333" }}
+          />
         </button>
 
         <input
@@ -79,7 +86,24 @@ function Browser() {
           Favorites
         </div>
       </div>
-      {showFavorites && <div className="favoritesContainer">favorites</div>}
+      {showFavorites && (
+        <div className="favoritesContainer">
+          {favorites.map((item) => {
+            return (
+              <li
+                key={"favorites" + item.id}
+                onClick={() => {
+                  setUrl(item.url);
+                  setInputUrl(item.url);
+                  //handleGoClick();
+                }}
+              >
+                {item.name}
+              </li>
+            );
+          })}
+        </div>
+      )}
 
       <iframe src={url} title="Browser" />
     </div>

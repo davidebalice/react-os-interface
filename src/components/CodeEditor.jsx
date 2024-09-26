@@ -24,7 +24,6 @@ function CodeEditor() {
       console.log = originalLog;
     }
 
-    // Imposta l'output raccolto
     setOutput(consoleLog.join("\n"));
   };
 

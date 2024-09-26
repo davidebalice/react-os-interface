@@ -1,22 +1,19 @@
+import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 
-function Clock() {
+function ClockLogin({ screen, setScreen }) {
   const [dateTime, setDateTime] = useState(new Date());
 
   useEffect(() => {
-    // Funzione per aggiornare data e ora
     const tick = () => {
       setDateTime(new Date());
     };
 
-    // Imposta un intervallo per aggiornare ogni secondo
     const timerID = setInterval(tick, 1000);
 
-    // Pulizia dell'intervallo quando il componente viene smontato
     return () => clearInterval(timerID);
   }, []);
 
-  // Formattazione della data e dell'orario in italiano
   const dateFormatter = new Intl.DateTimeFormat("it-IT", {
     weekday: "long",
     year: "numeric",
@@ -27,19 +24,94 @@ function Clock() {
   const timeFormatter = new Intl.DateTimeFormat("it-IT", {
     hour: "2-digit",
     minute: "2-digit",
-    second: "2-digit",
   });
 
   const formattedDate = dateFormatter.format(dateTime);
   const formattedTime = timeFormatter.format(dateTime);
 
   return (
-    <div>
-      <h1>Data e Orario in Tempo Reale</h1>
-      <p>{formattedDate}</p>
-      <p>{formattedTime}</p>
+    <div className="clockLogin">
+      <motion.p
+        initial={{
+          y: -150,
+          opacity: 0,
+        }}
+        animate={{
+          y: screen === 0 ? 0 : -150,
+          opacity: screen === 0 ? 1 : 0,
+        }}
+        exit={{
+          opacity: 0,
+          y: -150,
+        }}
+        layout
+        transition={{
+          duration: 0.5,
+          type: "spring",
+          stiffness: 300,
+          damping: 30,
+          delay: 0,
+        }}
+      >
+        {formattedDate}
+      </motion.p>
+
+      <motion.p
+        initial={{
+          y: -150,
+          opacity: 0,
+        }}
+        animate={{
+          y: screen === 0 ? 0 : -150,
+          opacity: screen === 0 ? 1 : 0,
+        }}
+        exit={{
+          opacity: 0,
+          y: -150,
+        }}
+        layout
+        transition={{
+          duration: 0.5,
+          type: "spring",
+          stiffness: 300,
+          damping: 30,
+          delay: 0.3,
+        }}
+      >
+        {formattedTime}
+      </motion.p>
+
+      <motion.div
+        initial={{
+          y: 150,
+          opacity: 0,
+        }}
+        animate={{
+          y: screen === 0 ? 0 : 150,
+          opacity: screen === 0 ? 1 : 0,
+        }}
+        exit={{
+          opacity: 0,
+          y: 150,
+        }}
+        layout
+        transition={{
+          duration: 0.5,
+          type: "spring",
+          stiffness: 300,
+          damping: 30,
+          delay: 0.6,
+        }}
+        onClick={() => {
+          setScreen(1);
+        }}
+        className="LoginButton ClockLoginButton"
+        whileHover={{ scale: 1.1 }}
+      >
+        login
+      </motion.div>
     </div>
   );
 }
 
-export default Clock;
+export default ClockLogin;

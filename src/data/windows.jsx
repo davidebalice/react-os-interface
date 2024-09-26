@@ -2,13 +2,15 @@ import browser from "../assets/icons/browser.png";
 import calc from "../assets/icons/calc.png";
 import codeEditor from "../assets/icons/codeEditor.png";
 import db from "../assets/icons/db.png";
+import dino from "../assets/icons/dino.png";
 import explorer from "../assets/icons/explorer.png";
 import gear from "../assets/icons/gear.png";
 import github from "../assets/icons/github.png";
 import note from "../assets/icons/note.png";
 import pc from "../assets/icons/pc.png";
-import weather from "../assets/icons/weather.png";
 import spaceInvaders from "../assets/icons/spaceInvaders.png";
+import video from "../assets/icons/video.png";
+import weather from "../assets/icons/weather.png";
 
 const windows = [
   {
@@ -21,6 +23,7 @@ const windows = [
     minimized: false,
     info: "Select server and access to file system via api. In this demo is possible to connect to only one server.",
     type: "app",
+    resized: true,
   },
   {
     id: 2,
@@ -32,6 +35,7 @@ const windows = [
     minimized: false,
     info: "",
     type: "app",
+    resized: true,
   },
   {
     id: 3,
@@ -43,18 +47,19 @@ const windows = [
     minimized: false,
     info: "",
     type: "app",
+    resized: true,
   },
   {
     id: 4,
     name: "Site",
     img: db,
     position: { x: 40, y: 370 },
-
     zIndex: 100,
     opened: false,
     minimized: false,
     info: "",
     type: "app",
+    resized: true,
   },
   {
     id: 5,
@@ -66,6 +71,7 @@ const windows = [
     minimized: false,
     info: "",
     type: "app",
+    resized: true,
   },
   {
     id: 6,
@@ -77,6 +83,7 @@ const windows = [
     minimized: false,
     info: "",
     type: "app",
+    resized: true,
   },
   {
     id: 7,
@@ -88,6 +95,7 @@ const windows = [
     minimized: false,
     info: "",
     type: "app",
+    resized: true,
   },
   {
     id: 8,
@@ -100,6 +108,7 @@ const windows = [
     minimized: false,
     info: "",
     type: "app",
+    resized: false,
   },
   {
     id: 9,
@@ -112,6 +121,7 @@ const windows = [
     minimized: false,
     info: "",
     type: "app",
+    resized: true,
   },
   {
     id: 10,
@@ -123,6 +133,7 @@ const windows = [
     minimized: false,
     info: "",
     type: "app",
+    resized: true,
   },
   {
     id: 11,
@@ -134,6 +145,33 @@ const windows = [
     minimized: false,
     info: "",
     type: "app",
+    resized: true,
+  },
+  {
+    id: 12,
+    name: "Dino",
+    img: dino,
+    position: { x: 250, y: 150 },
+    zIndex: 100,
+    opened: false,
+    minimized: false,
+    info: "",
+    type: "app",
+    resized: false,
+    personalizedSize: { width: "80vh", height: "690px" },
+  },
+  {
+    id: 13,
+    name: "Video",
+    img: video,
+    position: { x: 250, y: 260 },
+    zIndex: 100,
+    personalizedSize: { width: "800px", height: "480px" },
+    opened: false,
+    minimized: false,
+    info: "",
+    type: "app",
+    resized: false,
   },
 ];
 

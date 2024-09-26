@@ -13,6 +13,8 @@ import Settings from "../components/Settings";
 import Weather from "../components/weather/Weather";
 import { useOsContext } from "../context/Context";
 import CodeEditor from "./CodeEditor";
+import Video from "./Video";
+import Dino from "./Dino";
 
 const Window = ({
   icon,
@@ -215,7 +217,9 @@ const Window = ({
                   <img src={icon.img} className="window-header-icon" />
                 </>
               )}
-              <span>{icon && icon.name}</span>
+              <span>
+                {icon && icon.name}
+              </span>
             </div>
 
             <div
@@ -291,6 +295,10 @@ const Window = ({
                 return <Weather />;
               case 10:
                 return <CodeEditor />;
+              case 12:
+                return <Dino />;
+              case 13:
+                return <Video />;
               default:
                 return null;
             }
@@ -300,56 +308,60 @@ const Window = ({
             <pre className="fileContent">{icon.content}</pre>
           )}
 
-          <div
-            onMouseDown={(e) => handleResize(e, "e")}
-            style={{
-              width: 2,
-              height: "100%",
-              backgroundColor: "#ddd",
-              position: "absolute",
-              top: 0,
-              right: 0,
-              cursor: "ew-resize",
-              zIndex: icon.zIndex + 1,
-            }}
-          />
-          <div
-            onMouseDown={(e) => handleResize(e, "w")}
-            style={{
-              width: 2,
-              height: "100%",
-              backgroundColor: "#ddd",
-              position: "absolute",
-              left: 0,
-              top: 0,
-              cursor: "ew-resize",
-              zIndex: icon.zIndex + 2,
-            }}
-          />
-          <div
-            onMouseDown={(e) => handleResize(e, "n")}
-            style={{
-              width: "100%",
-              height: 2,
-              backgroundColor: "#ddd",
-              position: "absolute",
-              top: 0,
-              cursor: "ns-resize",
-              zIndex: icon.zIndex + 2,
-            }}
-          />
-          <div
-            onMouseDown={(e) => handleResize(e, "s")}
-            style={{
-              width: "100%",
-              height: 2,
-              backgroundColor: "#ddd",
-              position: "absolute",
-              bottom: 0,
-              cursor: "ns-resize",
-              zIndex: icon.zIndex + 2,
-            }}
-          />
+          {icon.resized && (
+            <>
+              <div
+                onMouseDown={(e) => handleResize(e, "e")}
+                style={{
+                  width: 2,
+                  height: "100%",
+                  backgroundColor: "#ddd",
+                  position: "absolute",
+                  top: 0,
+                  right: 0,
+                  cursor: "ew-resize",
+                  zIndex: icon.zIndex + 1,
+                }}
+              />
+              <div
+                onMouseDown={(e) => handleResize(e, "w")}
+                style={{
+                  width: 2,
+                  height: "100%",
+                  backgroundColor: "#ddd",
+                  position: "absolute",
+                  left: 0,
+                  top: 0,
+                  cursor: "ew-resize",
+                  zIndex: icon.zIndex + 2,
+                }}
+              />
+              <div
+                onMouseDown={(e) => handleResize(e, "n")}
+                style={{
+                  width: "100%",
+                  height: 2,
+                  backgroundColor: "#ddd",
+                  position: "absolute",
+                  top: 0,
+                  cursor: "ns-resize",
+                  zIndex: icon.zIndex + 2,
+                }}
+              />
+              <div
+                onMouseDown={(e) => handleResize(e, "s")}
+                style={{
+                  width: "100%",
+                  height: 2,
+                  backgroundColor: "#ddd",
+                  position: "absolute",
+                  bottom: 0,
+                  cursor: "ns-resize",
+                  zIndex: icon.zIndex + 2,
+                }}
+              />
+            </>
+          )}
         </motion.div>
       )}
     </AnimatePresence>
@@ -367,6 +379,7 @@ Window.propTypes = {
     info: PropTypes.string,
     zIndex: PropTypes.number.isRequired,
     opened: PropTypes.bool.isRequired,
+    resized: PropTypes.bool.isRequired,
     minimized: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
     personalizedSize: PropTypes.shape({

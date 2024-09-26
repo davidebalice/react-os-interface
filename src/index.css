@@ -44,6 +44,11 @@ body {
 .loginBg {
   background: url("./assets/images/bg.jpg") !important;
   background-size: cover !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .demoHome {
@@ -276,11 +281,34 @@ body {
 .window-row {
   display: flex;
   height: 100%;
+  position: relative;
 }
 
-.window-row {
+.window-row-urlbar {
+  background: #f0f5f9;
+  width: 100%;
+  height: 46px;
   display: flex;
-  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+.window-row-url {
+  background: #fff;
+  width: 98%;
+  height: 30px;
+  display: flex;
+  padding: 2px 12px;
+  gap: 8px;
+  align-items: center;
+  flex-direction: row;
+  border-radius: 6px;
+}
+
+.window-row-url span {
+  color: #777;
+  font-size: 14px;
+  margin-top: -2px;
 }
 
 .window-row > div:nth-child(1) {
@@ -340,7 +368,7 @@ body {
   background: #fff;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
-  box-shadow: 0px -3px 8px 0px rgb(0, 0, 0, 0.16);
+  box-shadow: 0px -3px 8px 0px rgb(0, 0, 0, 0.1);
 }
 
 .startButton {
@@ -436,12 +464,33 @@ body {
   font-size: 14px;
 }
 
-.pcItem {
+.serverItem {
   width: 90px;
+  height: 120px;
+  cursor: pointer;
 }
 
-.pcItem img {
+.serverItem img {
   width: 100%;
+}
+
+.serverListItem {
+  width: 100%;
+  display: flex;
+  cursor: pointer;
+  padding: 14px 12px;
+  gap: 14px;
+  align-items: center;
+  font-size: 13px;
+  box-shadow: 0px 1px 1px 0px rgb(0, 0, 0, 0.1);
+}
+
+.serverListItem img {
+  width: 30px;
+}
+
+.serverListItem:hover {
+  background-color: #e1e1e1;
 }
 
 .filesystemRow {
@@ -588,10 +637,10 @@ body {
   scrollbar-color: #888 #f1f1f1;
 }
 
-.browser input{
+.browser input {
   background-color: #edf2fa;
-  flex:1;
-  padding:5px 15px;
+  flex: 1;
+  padding: 5px 15px;
   border-radius: 50px;
 }
 
@@ -602,31 +651,31 @@ body {
   border-bottom: 1px solid #ddd;
 }
 
-.favorites{
-  width:114px;
+.favorites {
+  width: 114px;
   display: flex;
-  gap:8px;
+  gap: 8px;
   cursor: pointer;
-  padding:3px 10px;
+  padding: 3px 10px;
   align-items: center;
 }
 
-.favorites:hover{
+.favorites:hover {
   background-color: #edf2fa;
 }
 
-.blank{
-  width:60px;
+.blank {
+  width: 60px;
 }
 
-.topButton{
+.topButton {
   padding: 5px 7px;
   margin-left: 5px;
   margin-right: 5px;
   cursor: pointer;
 }
 
-.topButton:hover{
+.topButton:hover {
   background-color: #edf2fa;
 }
 
@@ -635,9 +684,29 @@ body {
   right: 16px;
   margin-top: -1px;
   background-color: #fff;
-  width: 300px;
+  width: 200px;
   height: 700px;
+  box-shadow: -2px 3px 5px 0px rgb(0, 0, 0, 0.3);
 }
+
+.videoContainer ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+.favoritesContainer li {
+  padding: 0;
+  list-style-type: none;
+  cursor: pointer;
+  padding: 12px 18px;
+  font-size: 13px;
+  box-shadow: 0px 1px 1px 0px rgb(0, 0, 0, 0.1);
+}
+
+.favoritesContainer li:hover {
+  background-color: #f9f9f9;
+}
+
 
 @font-face {
   font-family: "digital7";
@@ -790,4 +859,104 @@ body {
   .numbers {
     font-size: 1.7vw;
   }
+}
+
+.clockLogin {
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+}
+
+.clockLogin > p:nth-child(1) {
+  font-size: 22px;
+}
+
+.clockLogin > p:nth-child(2) {
+  font-size: 50px;
+}
+
+.loginBox {
+  width: 90%;
+  max-width: 400px;
+  border: 1px solid #222;
+  padding: 40px;
+  border-radius: 10px;
+  margin-top: -130px;
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 2px 3px 5px 0px rgb(0, 0, 0, 0.3);
+}
+
+.loginBox img {
+  width: 120px;
+  margin: 0 auto;
+  margin-top: -10px;
+  margin-bottom: 20px;
+}
+
+.LoginButton {
+  background-color: #34569f;
+  border-radius: 6px;
+  color: white;
+  width: 100%;
+  margin: 0 auto;
+  padding: 5px;
+  font-weight: bold;
+  font-size: 13px;
+  margin-top: 12px;
+  cursor: pointer;
+}
+
+.LoginButton:hover {
+  background-color: #163984;
+}
+
+.ClockLoginButton {
+  width: 110px;
+  margin-top: 32px;
+}
+
+.videoContainer {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.videoContainer > div:nth-child(1) {
+  background: #f0f0f0;
+  width: 180px;
+}
+
+.videoContainer > div:nth-child(2) {
+  flex: 1;
+  position: relative;
+}
+
+.videoIframe {
+  border: 0;
+}
+
+.videoContainer ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+.videoContainer li {
+  padding: 0;
+  list-style-type: none;
+  cursor: pointer;
+  padding: 14px 12px;
+  font-size: 13px;
+  box-shadow: 0px 1px 1px 0px rgb(0, 0, 0, 0.1);
+}
+
+.videoContainer li:hover {
+  background-color: #f9f9f9;
+}
+
+.server-row {
+  display: flex;
+  gap: 24px;
+  text-align: center;
+  font-size: 14px;
+  padding: 40px;
 }
