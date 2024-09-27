@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import dirImg from "../assets/icons/explorer.png";
 import fileImg from "../assets/icons/file.png";
+import img from "../assets/icons/img.png";
 import note from "../assets/icons/note.png";
 import serverIcon from "../assets/icons/server.png";
 import config from "../config";
@@ -14,6 +15,19 @@ const Explorer = () => {
   const [fileList, setFileList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentDirectory, setCurrentDirectory] = useState("");
+
+  const getFileIcon = (filename) => {
+    const extension = filename.split(".").pop().toLowerCase();
+    switch (extension) {
+      case "png":
+      case "jpg":
+      case "jpeg":
+      case "gif":
+        return img;
+      default:
+        return fileImg;
+    }
+  };
 
   const getTokenFromStorage = () => {
     return localStorage.getItem("token");
@@ -112,6 +126,12 @@ const Explorer = () => {
   const file = async (filename) => {
     const token = getTokenFromStorage();
     const newPosition = calculateNextPosition(icons);
+
+    const isImageFile = (filename) => {
+      const extension = filename.split(".").pop().toLowerCase();
+      return ["png", "jpg", "jpeg", "gif"].includes(extension);
+    };
+
     await axios
       .get(config.apiUrlFile, {
         params: { dir: currentDirectory, filename: filename },
@@ -131,7 +151,7 @@ const Explorer = () => {
           content: response.data.content,
           info: "",
           resized: true,
-          type: "file",
+          type: isImageFile(filename) ? "img" : "file",
         };
         setIcons((prevIcons) => [...prevIcons, newWindow]);
       })
@@ -229,7 +249,7 @@ const Explorer = () => {
                       </>
                     ) : (
                       <>
-                        <img src={fileImg} />
+                        <img src={getFileIcon(item.name)} />
                       </>
                     )}
 

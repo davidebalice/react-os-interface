@@ -117,6 +117,18 @@ body {
   color: #fff;
 }
 
+.infoWindow {
+  padding: 12px;
+  font-size: 14px;
+  color: #555;
+}
+
+.infoWindowContainer {
+  background: #f9f9f9;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
 .bottomBar {
   height: 60px;
   width: 100%;
@@ -681,11 +693,11 @@ body {
 
 .favoritesContainer {
   position: absolute;
-  right: 16px;
+  right: 0px;
   margin-top: -1px;
   background-color: #fff;
   width: 200px;
-  height: 700px;
+  height: 100vh;
   box-shadow: -2px 3px 5px 0px rgb(0, 0, 0, 0.3);
 }
 
@@ -706,7 +718,6 @@ body {
 .favoritesContainer li:hover {
   background-color: #f9f9f9;
 }
-
 
 @font-face {
   font-family: "digital7";
@@ -959,4 +970,127 @@ body {
   text-align: center;
   font-size: 14px;
   padding: 40px;
+}
+
+.codeEditor {
+  display: flex;
+}
+
+.codeEditor > div:nth-child(1) {
+  width: 190px;
+  height: 100vh;
+  border-right: 1px solid #ddd;
+}
+
+.codeEditor > div:nth-child(1) ul {
+  padding: 6px;
+}
+
+.codeEditor > div:nth-child(1) li {
+  cursor: pointer;
+  margin-bottom: 8px;
+  color: #555;
+  font-size: 13px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 7px;
+  padding: 8px;
+}
+
+.codeEditor > div:nth-child(1) li:hover {
+  background-color: #f1f1f1;
+}
+
+.codeEditor > div:nth-child(1) img {
+  width: 19px;
+}
+
+.codeEditor > div:nth-child(2) {
+  flex: 1 1;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.codeOutput {
+  height: 50%;
+  padding: 12px;
+}
+
+.codeOutput button {
+  background: #444;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 4px;
+}
+
+.codeOutput button:hover {
+  background: #777;
+}
+
+.settingItem {
+  display: flex;
+  align-items: center;
+  padding: 24px 20px;
+  gap: 14px;
+  color: #444;
+  font-size: 14px;
+  box-shadow: 0px 1px 1px 0px rgb(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.settingItem:hover {
+  background: #f1f1f1;
+}
+
+.formContainer p {
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+.inputContainer {
+  display: flex;
+  width: 450px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.inputContainer > label:nth-child(1) {
+  width: 90px;
+  font-size: 15px;
+}
+
+.inputContainer > input:nth-child(2) {
+  flex: 1;
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  padding: 6px;
+  font-size: 14px;
+}
+
+.saveButton {
+  background-color: #444;
+  color: #fff;
+  padding: 6px 14px;
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  border-radius: 4px;
+  margin-left: 110px;
+}
+
+.saveButton:hover {
+  background-color: #777;
+}
+
+.saveButtonIcon {
+  font-size: 17px;
+}
+
+.spacer {
+  width: 100%;
+  border-top: 1px solid #ddd;
+  margin-top: 30px;
+  height: 30px;
 }

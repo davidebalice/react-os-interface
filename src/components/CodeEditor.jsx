@@ -1,5 +1,6 @@
 import Editor from "@monaco-editor/react";
 import React, { useState } from "react";
+import note from "../assets/icons/note.png";
 import scripts from "../data/scripts";
 
 function CodeEditor() {
@@ -28,42 +29,33 @@ function CodeEditor() {
   };
 
   return (
-    <div className="App">
-      <ul>
-        {Object.keys(scripts).map((scriptName) => (
-          <li key={scriptName}>
-            <button onClick={() => setSelectedScript(scriptName)}>
-              {scriptName.toLowerCase().replace(/\s+/g, "-")}.js
-            </button>
-          </li>
-        ))}
-      </ul>
-
-      <label>Seleziona uno script:</label>
-      <select
-        value={selectedScript}
-        onChange={(e) => setSelectedScript(e.target.value)}
-      >
-        {Object.keys(scripts).map((scriptName) => (
-          <option key={scriptName} value={scriptName}>
-            {scriptName}
-          </option>
-        ))}
-      </select>
-
-      <Editor
-        height="50vh"
-        language="javascript"
-        value={scripts[selectedScript]}
-        theme="vs-dark"
-        options={{ readOnly: true }}
-      />
-
-      <button onClick={executeScript}>Esegui Codice</button>
+    <div className="codeEditor">
+      <div>
+        <ul>
+          {Object.keys(scripts).map((scriptName) => (
+            <li key={scriptName} onClick={() => setSelectedScript(scriptName)}>
+              <img src={note} />
+              <span>{scriptName.toLowerCase().replace(/\s+/g, "-")}.js</span>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       <div>
-        <h2>Output:</h2>
-        <pre>{output}</pre>
+        <Editor
+          height="50%"
+          language="javascript"
+          value={scripts[selectedScript]}
+          theme="vs-dark"
+          options={{ readOnly: true }}
+        />
+        <div className="codeOutput">
+          <button onClick={executeScript}>Run code</button>
+          <br /> <br />
+          <pre>Output:</pre>
+          <br />
+          <pre>{output}</pre>
+        </div>
       </div>
     </div>
   );

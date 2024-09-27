@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
 import { FaImage } from "react-icons/fa";
-import { MdAccountCircle } from "react-icons/md";
 import { LuView } from "react-icons/lu";
+import { MdAccountCircle } from "react-icons/md";
 import { useOsContext } from "../context/Context";
 import backgrounds from "../data/backgrounds";
 import Profile from "./Profile";
@@ -12,6 +13,22 @@ const Settings = () => {
   const [brightness, setBrightness] = useState(1);
   const [contrast, setContrast] = useState(1);
   const [filter, setFilter] = useState("");
+  const [loaded, setLoaded] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoaded(true);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (loaded && !hasAnimated) {
+      setHasAnimated(true);
+    }
+  }, [loaded, hasAnimated]);
 
   const handleBrightnessChange = (e) => {
     const newBrightness = e.target.value;
@@ -48,7 +65,18 @@ const Settings = () => {
         return (
           <>
             <div className="window-row-title">Backgrounds</div>
-            <div className="backgroundContainer">
+            <motion.div
+              className="backgroundContainer"
+              initial={hasAnimated ? {} : { y: -10, opacity: 0 }}
+              animate={hasAnimated ? {} : { y: 0, opacity: 1 }}
+              transition={{
+                duration: 0.5,
+                type: "spring",
+                stiffness: 300,
+                damping: 30,
+                delay: 0.5,
+              }}
+            >
               {backgrounds &&
                 backgrounds.map((item, index) => (
                   <div
@@ -59,7 +87,7 @@ const Settings = () => {
                     <img src={item.bg} />
                   </div>
                 ))}
-            </div>
+            </motion.div>
           </>
         );
       case "view":
@@ -232,18 +260,30 @@ const Settings = () => {
     <>
       <div className="window-row">
         <div>
-          <div onClick={() => setSettingsSection("bg")}>
-            <FaImage />
+          <div
+            onClick={() => setSettingsSection("bg")}
+            className="settingItem"
+            style={{ background: settingsSection === "bg" && "#f1f1f1" }}
+          >
+            <FaImage size={20} />
             Backgrounds
           </div>
 
-          <div onClick={() => setSettingsSection("view")}>
-            <LuView />
+          <div
+            onClick={() => setSettingsSection("view")}
+            className="settingItem"
+            style={{ background: settingsSection === "view" && "#f1f1f1" }}
+          >
+            <LuView size={20} />
             Visualization
           </div>
 
-          <div onClick={() => setSettingsSection("account")}>
-            <MdAccountCircle />
+          <div
+            onClick={() => setSettingsSection("account")}
+            className="settingItem"
+            style={{ background: settingsSection === "account" && "#f1f1f1" }}
+          >
+            <MdAccountCircle size={20} />
             Account
           </div>
         </div>

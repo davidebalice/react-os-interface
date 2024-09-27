@@ -6,6 +6,7 @@ const config = {
   apiUrlDirectory: "https://node-fs-api.davidebalice.dev/api/checkdir",
   apiUrlDeleteFile: "https://node-fs-api.davidebalice.dev/api/delete",
   apiUrlRenameFile: "https://node-fs-api.davidebalice.dev/api/rename",
+  apiUrlGetUser: "https://node-fs-api.davidebalice.dev/api/get/user",
   demoMode: true,
 };
 

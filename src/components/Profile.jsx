@@ -1,5 +1,6 @@
 import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
@@ -49,8 +50,8 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    api
-      .get(`/api/profile`, {
+    axios
+      .post(config.apiUrlGetUser, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -171,128 +172,115 @@ const Profile = () => {
               <IoClose className="demo-modal-icon-close" />
             </button>
           </div>
-          DEMO
+          <br />
+          <b style={{ color: "red" }}>DEMO MODE</b>
+          <br />
+          <br />
+          Update are not allowed.
         </motion.div>
       )}
 
       <div className="formContainer">
-        <div className="row ">
-          <h4>Personal data</h4>
-          <br />
-          <br />
-          <div className="col-md-6 mt-3">
-            <label htmlFor="name">
-              <b>Surname</b>
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              name="surname"
-              required
-              value={formData.surname}
-              onChange={handleInput}
-            />
-          </div>
-          <div className="col-md-6 mt-3">
-            <label htmlFor="name">
-              <b>Name</b>
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              name="name"
-              required
-              value={formData.name}
-              onChange={handleInput}
-            />
-          </div>
-          <div className="col-md-6 mt-3">
-            <label htmlFor="priority">
-              <b>Email</b>
-            </label>
-            <input
-              type="email"
-              className="form-control"
-              name="email"
-              required
-              value={formData.email}
-              onChange={handleInput}
-            />
-          </div>
+        <p>Personal data</p>
+
+        <div className="inputContainer">
+          <label htmlFor="name">Surname</label>
+          <input
+            type="text"
+            className="form-control"
+            name="surname"
+            required
+            value={formData.surname}
+            onChange={handleInput}
+          />
         </div>
-        <button onClick={submitForm} className="btn saveButton btn-sm mt-3">
-          <FontAwesomeIcon icon={faFloppyDisk} className="saveButtonIcon" />{" "}
+
+        <div className="inputContainer">
+          <label htmlFor="name">Name</label>
+          <input
+            type="text"
+            className="form-control"
+            name="name"
+            required
+            value={formData.name}
+            onChange={handleInput}
+          />
+        </div>
+
+        <div className="inputContainer">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            className="form-control"
+            name="email"
+            required
+            value={formData.email}
+            onChange={handleInput}
+          />
+        </div>
+
+        <button onClick={submitForm} className="saveButton">
+          <FontAwesomeIcon icon={faFloppyDisk} className="saveButtonIcon" />
           Save
         </button>
 
-        <ul />
+        <div className="spacer"> </div>
 
-        <h4>Update password</h4>
-        <br />
-        <div className="row ">
-          <div className="col-md-6 mt-3">
-            <label htmlFor="name">
-              <b>Password</b>
-            </label>
-            <input
-              type="password"
-              className="form-control"
-              name="password"
-              required
-              value={passwordData.password}
-              onChange={handleInputPassword}
-            />
-          </div>
-          <div className="col-md-6 mt-3">
-            <label htmlFor="name">
-              <b>Confirm password</b>
-            </label>
-            <input
-              type="password"
-              className="form-control"
-              name="passwordConfirm"
-              required
-              value={passwordData.passwordConfirm}
-              onChange={handleInputPassword}
-            />
-          </div>
+        <p>Update password</p>
+
+        <div className="inputContainer">
+          <label htmlFor="name">Password</label>
+          <input
+            type="password"
+            className="form-control"
+            name="password"
+            required
+            value={passwordData.password}
+            onChange={handleInputPassword}
+          />
+        </div>
+        <div className="inputContainer">
+          <label htmlFor="name">Confirm</label>
+          <input
+            type="password"
+            className="form-control"
+            name="passwordConfirm"
+            required
+            value={passwordData.passwordConfirm}
+            onChange={handleInputPassword}
+          />
         </div>
 
-        <button onClick={submitPassword} className="btn saveButton btn-sm mt-3">
-          <FontAwesomeIcon icon={faFloppyDisk} className="saveButtonIcon" />{" "}
+        <button onClick={submitPassword} className="saveButton">
+          <FontAwesomeIcon icon={faFloppyDisk} className="saveButtonIcon" />
           Save
         </button>
 
-        <ul />
+        <div className="spacer"> </div>
 
-        <div className="row ">
-          <div className="mt-3">
-            <h4>Profile photo</h4>
-            <br /> <br />
-            <img
-              src={`${config.apiUrl}/api/user/img/${
-                formData && formData.photo
-              }`}
-              className="userImg"
-              alt=""
-            />
-          </div>
-          <div className="col-md-6 mt-3">
-            <label htmlFor="photo">
-              <b>Select file</b>
-            </label>
-            <input
-              type="file"
-              className="form-control"
-              name="photo"
-              required
-              onChange={handleFile}
-            />
-          </div>
+        <div>
+          <p htmlFor="name">Profile photo</p>
+
+          <img
+            src={`${config.apiUrl}/api/user/img/${formData && formData.photo}`}
+            className="userImg"
+            alt=""
+          />
         </div>
 
-        <button onClick={submitPhoto} className="btn saveButton btn-sm mt-3">
-          <FontAwesomeIcon icon={faFloppyDisk} className="saveButtonIcon" />{" "}
+        <div className="inputContainer">
+          <label htmlFor="photo">Select file</label>
+          <input
+            type="file"
+            className="form-control"
+            name="photo"
+            required
+            onChange={handleFile}
+          />
+        </div>
+
+        <button onClick={submitPhoto} className="saveButton">
+          <FontAwesomeIcon icon={faFloppyDisk} className="saveButtonIcon" />
           Save
         </button>
       </div>

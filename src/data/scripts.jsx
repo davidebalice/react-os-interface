@@ -8,7 +8,7 @@ const scripts = {
 
   Sum: `
       const sum = 5 + 3;
-      console.log('La somma di 5 + 3 è:', sum);
+      console.log('Sum  5 + 3 is:', sum);
     `,
 
   "For cycle": `
@@ -53,21 +53,65 @@ const scripts = {
         { name: 'Anna', age: 22 }
       ];
       people.forEach(person => {
-        console.log(\`\${person.name} ha \${person.age} age\`);
+        console.log(\`\${person.name} is \${person.age} years old\`);
       });
     `,
 
-  "Filtrare array": `
-      const numeri = [10, 5, 15, 3, 20, 8];
-      const numeriMaggioriDi10 = numeri.filter(n => n > 10);
-      console.log('Numeri maggiori di 10:', numeriMaggioriDi10.join(', '));
+  "Filter array greater": `
+      const numbers = [10, 5, 15, 3, 20, 8];
+      const greater10 = numbers.filter(n => n > 10);
+      console.log('Numbers greater than 10:', greater10.join(', '));
     `,
 
-  "Mappare array": `
-      const numeri = [1, 2, 3, 4, 5];
-      const quadrati = numeri.map(n => n * n);
-      console.log('Quadrati dei numeri:', quadrati.join(', '));
+  "Filter even numbers": `
+      const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      const evenNumbers = numbers.filter(n => n % 2 === 0);
+      console.log('Even numbers from 1 to 10:', evenNumbers.join(', '));
     `,
+
+  "Filter adults": `
+      const people = [
+        { name: 'Mario', age: 30 },
+        { name: 'Luigi', age: 25 },
+        { name: 'Yoshi', age: 17 },
+        { name: 'Peach', age: 22 }
+      ];
+      const adults = people.filter(person => person.age >= 18);
+      console.log('Adults:', adults.map(p => p.name).join(', '));
+    `,
+
+  "Map squares": `
+      const numbers = [1, 2, 3, 4, 5];
+      const squares = numbers.map(n => n * n);
+      console.log('Squares of the numbers '+numbers+':', squares.join(', '));
+    `,
+
+  "Map to double values": `
+    const numbers = [1, 2, 3, 4, 5];
+    const doubles = numbers.map(n => n * 2);
+    console.log('Doubled values of the numbers ' + numbers + ':', doubles.join(', '));
+  `,
+
+  "Map to object names": `
+    const people = [
+      { name: 'Mario', age: 30 },
+      { name: 'Luigi', age: 25 },
+      { name: 'Yoshi', age: 22 }
+    ];
+
+      console.log('//Map only name');
+      const names = people.map(person => person.name);
+      console.log('Names of people:', names.join(', '));
+
+      console.log('');
+      console.log('//Cicle all people object');
+      const namesAndAges = people.map(person => {
+      console.log(\`Name: \${person.name}, Age: \${person.age}\`);
+    });
+
+   
+ 
+  `,
 };
 
 export default scripts;

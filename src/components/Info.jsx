@@ -3,7 +3,8 @@ const Info = () => {
     <div className="infoContainer">
       <div className="info">
         <b>Os interface</b>
-        <br /><br />
+        <br />
+        <br />
         ------------------------------------------------------------------------------------
         <br />
         <br />
@@ -28,7 +29,6 @@ const Info = () => {
         </a>
         <br />
         <br />
-
         Backend:
         <br />
         <a
@@ -38,34 +38,31 @@ const Info = () => {
         >
           github.com/davidebalice/node-file-system-api
         </a>
-
         <br />
         <br />
-
         ------------------------------------------------------------------------------------
-
         <br />
         <br />
-
-
         <div>
-       
-
-        <b>Os Interface</b> is an app that mimics the design of an operating system like Windows.
-        
-        <br />
-
-
-         It features a system of <b>multiple windows</b> that can be moved, resized, or minimized, making it ideal for viewing and managing multiple information simultaneously.
-        
-         <br />
-         
-          Through its <b>Explorer</b>  window, the app communicates with a server via <b>API</b>, allowing users to access the file system and browse the source code of various projects.
+          <b>Os Interface</b> is an app that mimics the design of an operating
+          system like Windows.
+          <br />
+          It features a system of <b>multiple windows</b> that can be moved,
+          resized, or minimized, making it ideal for viewing and managing
+          multiple information simultaneously.
+          <br />
+          Through its <b>Explorer</b> window, the app communicates with a server
+          via <b>API</b>, allowing users to access the file system and browse
+          the source code of various projects.
+          <br />
+          <br />
+          This App is in <b>Demo Mode</b>, Explorer is only read. Write, update
+          and delete files/directory are not allowed.
           <br /><br />
-          This App is in <b>Demo Mode</b>, Explorer is only read. Write, update and delete files/directory are not allowed. 
-
-
-
+          <b>Use:</b>
+          <br />
+          <br />
+          Double-click on the icons on the desktop to open the corresponding window. Windows can be moved, resized, minimized.
         </div>
         <br />
         <br />

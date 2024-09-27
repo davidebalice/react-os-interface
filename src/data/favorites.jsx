@@ -19,6 +19,46 @@ const favorites = [
     name: "Css generator",
     url: "https://css-generator.davidebalice.dev/",
   },
+  {
+    id: 5,
+    name: "Creative agency site",
+    url: "https://creative-agency.davidebalice.dev/",
+  },
+  {
+    id: 6,
+    name: "Meme generator",
+    url: "https://meme-generator.davidebalice.dev/",
+  },
+  {
+    id: 7,
+    name: "3D Configurator",
+    url: "https://3d-configurator.davidebalice.dev/",
+  },
+  {
+    id: 8,
+    name: "React Tools",
+    url: "https://react-tools.davidebalice.dev/",
+  },
+  {
+    id: 9,
+    name: "Animated Ui",
+    url: "https://react-animated-ui.davidebalice.dev/",
+  },
+  {
+    id: 10,
+    name: "Gallery",
+    url: "https://react-gallery.davidebalice.dev/",
+  },
+  {
+    id: 11,
+    name: "3d Devices",
+    url: "https://html-frame-3d-devices.davidebalice.dev/",
+  },
+  {
+    id: 12,
+    name: "3D Gallery",
+    url: "https://react-fiber-3d-gallery.davidebalice.dev/",
+  },
 ];
 
 export default favorites;

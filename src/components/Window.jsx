@@ -13,8 +13,9 @@ import Settings from "../components/Settings";
 import Weather from "../components/weather/Weather";
 import { useOsContext } from "../context/Context";
 import CodeEditor from "./CodeEditor";
-import Video from "./Video";
 import Dino from "./Dino";
+import SpaceInvaders from "./SpaceInvaders";
+import Video from "./Video";
 
 const Window = ({
   icon,
@@ -43,6 +44,8 @@ const Window = ({
       }
     } else if (icon.type === "file") {
       return { width: "60vw", height: "60vh" };
+    } else if (icon.type === "img") {
+      return { width: "600px", height: "400px" };
     } else {
       return { width: "80vw", height: "80vh" };
     }
@@ -217,9 +220,7 @@ const Window = ({
                   <img src={icon.img} className="window-header-icon" />
                 </>
               )}
-              <span>
-                {icon && icon.name}
-              </span>
+              <span>{icon && icon.name}</span>
             </div>
 
             <div
@@ -259,14 +260,14 @@ const Window = ({
 
           <motion.div
             onPointerDown={handleInfo}
-            className=""
+            className="infoWindowContainer"
             showHelp
             initial={{
               height: 0,
               opacity: 0,
             }}
             animate={{
-              height: showHelp ? "100px" : 0,
+              height: showHelp ? "80px" : 0,
               opacity: showHelp ? 1 : 0,
             }}
             exit={{
@@ -274,7 +275,7 @@ const Window = ({
               opacity: 0,
             }}
           >
-            <div className="">{icon.info}</div>
+            <div className="infoWindow">{icon.info}</div>
           </motion.div>
 
           {(() => {
@@ -295,6 +296,8 @@ const Window = ({
                 return <Weather />;
               case 10:
                 return <CodeEditor />;
+              case 11:
+                return <SpaceInvaders />;
               case 12:
                 return <Dino />;
               case 13:
@@ -304,8 +307,15 @@ const Window = ({
             }
           })()}
 
-          {icon.content !== "" && (
+          {icon.type === "file" && icon.content !== "" && (
             <pre className="fileContent">{icon.content}</pre>
+          )}
+
+          {icon.type === "img" && (
+            <img
+              src={`https://node-fs-api.davidebalice.dev/api/photo/${icon.name}`}
+              style={{ width: "100%" }}
+            />
           )}
 
           {icon.resized && (
