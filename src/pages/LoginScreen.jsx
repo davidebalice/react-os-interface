@@ -10,15 +10,15 @@ const LoginScreen = () => {
   const [loader, setLoader] = useState(false);
   const [screen, setScreen] = useState(0);
 
-  const [state, setState] = useState({
+  const [userData, setUserData] = useState({
     name: "",
-    email: "",
-    password: "",
+    email: "mario@rossi.it",
+    password: "12345678",
   });
 
   const inputHandle = (e) => {
-    setState({
-      ...state,
+    setUserData({
+      ...userData,
       [e.target.name]: e.target.value,
     });
   };
@@ -28,11 +28,11 @@ const LoginScreen = () => {
 
     try {
       setLoader(true);
-      const { data } = await api.post("api/login", state);
+      const { data } = await api.post("api/login", userData);
       setLoader(false);
 
       localStorage.setItem("token", data.token);
-      setState({
+      setUserData({
         email: "",
         password: "",
       });
@@ -127,7 +127,7 @@ const LoginScreen = () => {
                 name="email"
                 id="email"
                 placeholder="email"
-                value={state.email}
+                value={userData.email}
                 className="px-3 py-2 rounded-md border outline-none border-[#5c5c5e] focus:border-purple-500 bg-transparent"
               />
             </motion.div>
@@ -162,7 +162,7 @@ const LoginScreen = () => {
                 name="password"
                 id="password"
                 placeholder="password"
-                value={state.password}
+                value={userData.password}
                 className="px-3 py-2 rounded-md border outline-none border-[#5c5c5e] focus:border-purple-500 bg-transparent"
               />
             </motion.div>

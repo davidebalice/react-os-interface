@@ -352,12 +352,14 @@ body {
   transition: opacity 0.4s;
   box-shadow: 0px -1px 6px 0px rgb(0, 0, 0, 0.46);
   display: flex;
+  user-select: none;
 }
 
 .startContainerCol1 {
   width: 250px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .startContainerCol1 > div:nth-child(1) {
@@ -371,8 +373,28 @@ body {
   justify-content: center;
 }
 
-.startContainerCol1 > div:nth-child(2) {
-  flex: 1;
+.startIcon {
+  width: 100%;
+  display: flex;
+  padding: 8px 12px;
+  padding-left: 14px;
+  cursor: pointer;
+  margin-bottom: 2px;
+  gap: 10px;
+  align-items: center;
+}
+
+.startIcon:hover {
+  background: #cddded;
+}
+
+.startIcon img {
+  width: 28px;
+  height: auto;
+}
+
+.startIcon span {
+  font-size: 14px;
 }
 
 .startContainer > div:nth-child(2) {

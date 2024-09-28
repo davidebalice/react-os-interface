@@ -69,7 +69,7 @@ const windows = [
     zIndex: 100,
     opened: false,
     minimized: false,
-    info: "",
+    info: "Some information about this app.",
     type: "app",
     resized: true,
   },
