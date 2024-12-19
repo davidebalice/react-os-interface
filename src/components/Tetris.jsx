@@ -1,13 +1,13 @@
 import React from "react";
 
-const Dino = () => {
+const Tetris = () => {
 
   return (
     <>
       <iframe
         width="100%"
         height="690"
-        src="https://dino-js.davidebalice.dev"
+        src="https://tetris.davidebalice.dev"
         allowfullscreen
         className="videoIframe"
       ></iframe>
@@ -15,4 +15,4 @@ const Dino = () => {
   );
 };
 
-export default Dino;
+export default Tetris;

@@ -1,13 +1,12 @@
 import React from "react";
 
-const Dino = () => {
-
+const Audio = () => {
   return (
     <>
       <iframe
         width="100%"
-        height="690"
-        src="https://dino-js.davidebalice.dev"
+        height="500"
+        src="https://audio-player.davidebalice.dev/index3.html"
         allowfullscreen
         className="videoIframe"
       ></iframe>
@@ -15,4 +14,4 @@ const Dino = () => {
   );
 };
 
-export default Dino;
+export default Audio;

@@ -14,6 +14,8 @@ import Weather from "../components/weather/Weather";
 import { useOsContext } from "../context/Context";
 import CodeEditor from "./CodeEditor";
 import Dino from "./Dino";
+import Tetris from "./Tetris";
+import Audio from "./Audio";
 import SpaceInvaders from "./SpaceInvaders";
 import Video from "./Video";
 
@@ -302,6 +304,10 @@ const Window = ({
                 return <Dino />;
               case 13:
                 return <Video />;
+              case 14:
+                return <Tetris />;
+              case 15:
+                return <Audio />;
               default:
                 return null;
             }

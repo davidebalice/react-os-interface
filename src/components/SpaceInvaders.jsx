@@ -1,6 +1,5 @@
 import React from "react";
 
-import { useOsContext } from "../context/Context";
 
 const SpaceInvaders = () => {
 

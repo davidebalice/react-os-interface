@@ -23,15 +23,26 @@ const Video = () => {
           ))}
         </ul>
       </div>
-      <div>
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "0",
+          paddingTop: "56.25%" /* 16:9 Aspect Ratio */,
+        }}
+      >
         <iframe
-          width="620"
-          height="440"
           src={selectedVideo.url}
-          frameborder="0"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+          }}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
           className="videoIframe"
         ></iframe>
       </div>

@@ -10,6 +10,8 @@ import note from "../assets/icons/note.png";
 import pc from "../assets/icons/pc.png";
 import spaceInvaders from "../assets/icons/spaceInvaders.png";
 import video from "../assets/icons/video.png";
+import audio from "../assets/icons/audio.png";
+import tetris from "../assets/icons/tetris.png";
 import weather from "../assets/icons/weather.png";
 
 const windows = [
@@ -164,12 +166,38 @@ const windows = [
     id: 13,
     name: "Video",
     img: video,
-    position: { x: 250, y: 260 },
+    position: { x: 250, y: 370 },
     zIndex: 100,
     personalizedSize: { width: "800px", height: "480px" },
     opened: false,
     minimized: false,
     info: "Video player based on Youtube playlist.",
+    type: "app",
+    resized: true,
+  },
+  {
+    id: 14,
+    name: "Tetris",
+    img: tetris,
+    position: { x: 250, y: 260 },
+    zIndex: 100,
+    personalizedSize: { width: "800px", height: "680px" },
+    opened: false,
+    minimized: false,
+    info: "Tetris game clone developed in javascript",
+    type: "app",
+    resized: true,
+  },
+  {
+    id: 15,
+    name: "Audio",
+    img: audio,
+    position: { x: 250, y: 480 },
+    zIndex: 100,
+    personalizedSize: { width: "600px", height: "540px" },
+    opened: false,
+    minimized: false,
+    info: "Audio player developed in javascript",
     type: "app",
     resized: false,
   },
