@@ -1,6 +1,6 @@
 
 
-# Os interface Reactfrontend
+# Os interface React frontend
 
 Os interface is an app that takes the design of an os like Windows.
 <br>
