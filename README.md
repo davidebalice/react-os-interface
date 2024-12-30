@@ -17,11 +17,11 @@ https://os-interface.davidebalice.dev/
 
 ## Frontend repository:
 
-github.com/davidebalice/react-os-interface
+https://github.com/davidebalice/react-os-interface
 
 ## Backend repository:
 
-github.com/davidebalice/node-file-system-api
+https://github.com/davidebalice/node-file-system-api
 
 <br>
 
