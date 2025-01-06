@@ -12,11 +12,11 @@ import Server from "../components/Server";
 import Settings from "../components/Settings";
 import Weather from "../components/weather/Weather";
 import { useOsContext } from "../context/Context";
+import Audio from "./Audio";
 import CodeEditor from "./CodeEditor";
 import Dino from "./Dino";
-import Tetris from "./Tetris";
-import Audio from "./Audio";
 import SpaceInvaders from "./SpaceInvaders";
+import Tetris from "./Tetris";
 import Video from "./Video";
 
 const Window = ({
@@ -148,6 +148,17 @@ const Window = ({
         x: newX,
         y: newY,
       });
+
+      const iframe = document.querySelector("iframe");
+      if (iframe) {
+        iframe.style.display = "none";
+        setTimeout(() => {
+          iframe.style.display = "block";
+        }, 50);
+      }
+
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
     };
 
     const onMouseUp = () => {
@@ -303,7 +314,7 @@ const Window = ({
               case 12:
                 return <Dino />;
               case 13:
-                return <Video />;
+                return <Video height={size.height} />;
               case 14:
                 return <Tetris />;
               case 15:

@@ -1,7 +1,8 @@
+import PropTypes from "prop-types";
 import React, { useState } from "react";
 import video from "../data/video";
 
-const Video = () => {
+const Video = ({ height }) => {
   const [selectedVideo, setSelectedVideo] = useState(video[0]);
 
   const handleVideoSelect = (video) => {
@@ -10,7 +11,7 @@ const Video = () => {
 
   return (
     <div className="videoContainer">
-      <div>
+      <div style={{ height: `${height}px` }}>
         <ul>
           {video.map((video) => (
             <li
@@ -18,6 +19,7 @@ const Video = () => {
               onClick={() => handleVideoSelect(video)}
               style={{ background: selectedVideo.id === video.id && "#e1e1e1" }}
             >
+              <img src={video.thumb} />
               {video.title}
             </li>
           ))}
@@ -51,3 +53,7 @@ const Video = () => {
 };
 
 export default Video;
+
+Video.propTypes = {
+  height: PropTypes.string.isRequired,
+};
