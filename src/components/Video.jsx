@@ -1,28 +1,65 @@
 import PropTypes from "prop-types";
-import React, { useState } from "react";
-import video from "../data/video";
+import React, { useEffect, useState } from "react";
+import { RiPlayList2Fill } from "react-icons/ri";
+import { playlist, default as video } from "../data/video";
 
-const Video = ({ height }) => {
+const Video = () => {
   const [selectedVideo, setSelectedVideo] = useState(video[0]);
+  const [selectedPlaylist, setSelectedPlaylist] = useState(1);
+  const [selectedPlaylistTitle, setSelectedPlaylistTitle] = useState("");
+  const [playlistView, setPlaylistView] = useState(false);
 
   const handleVideoSelect = (video) => {
     setSelectedVideo(video);
   };
 
+  useEffect(() => {
+    setSelectedVideo(
+      video.find((item) => item.idPlaylist === selectedPlaylist)
+    );
+    setSelectedPlaylistTitle(
+      playlist.find((item) => item.id === selectedPlaylist)?.title || ""
+    );
+  }, [selectedPlaylist]);
+
   return (
     <div className="videoContainer">
-      <div style={{ height: `${height}px` }}>
-        <ul>
-          {video.map((video) => (
-            <li
-              key={video.id}
-              onClick={() => handleVideoSelect(video)}
-              style={{ background: selectedVideo.id === video.id && "#e1e1e1" }}
-            >
-              <img src={video.thumb} />
-              {video.title}
-            </li>
-          ))}
+      <div style={{ height: `100%` }}>
+        <ul style={{ height: `130%` }}>
+          <div>
+            <RiPlayList2Fill /> {selectedPlaylistTitle}
+            <div onClick={() => setPlaylistView(!playlistView)}>playlist</div>
+            
+            <div className={`playlistContainer ${playlistView ? "open" : ""}`}>
+              {playlist.map((item) => (
+                <li
+                  key={item.id}
+                  onClick={() => setSelectedPlaylist(item.id)}
+                  className="videoItem"
+                >
+                  <div className="videoTitle">{item.title}</div>
+                </li>
+              ))}
+            </div>
+          </div>
+
+          {video
+            .filter((item) => item.idPlaylist === selectedPlaylist)
+            .map((video) => (
+              <li
+                key={video.id}
+                onClick={() => handleVideoSelect(video)}
+                style={{
+                  background: selectedVideo.id === video.id && "#e1e1e1",
+                }}
+                className="videoItem"
+              >
+                <div className="videoThumb">
+                  <img src={video.thumb} />
+                </div>
+                <div className="videoTitle">{video.title}</div>
+              </li>
+            ))}
         </ul>
       </div>
       <div

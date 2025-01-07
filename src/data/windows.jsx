@@ -168,7 +168,7 @@ const windows = [
     img: video,
     position: { x: 250, y: 370 },
     zIndex: 100,
-    personalizedSize: { width: "900px", height: "480px" },
+    personalizedSize: { width: "900px", height: "550px" },
     opened: false,
     minimized: false,
     info: "Video player based on Youtube playlist.",

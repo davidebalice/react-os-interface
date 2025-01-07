@@ -950,16 +950,16 @@ body {
 
 .videoContainer {
   display: flex;
+  width: 100%;
   height: 100vh;
   position: relative;
-  width: 100%;
 }
 
 .videoContainer > div:nth-child(1) {
   background: #f0f0f0;
   width: 220px;
   height: 100vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   scrollbar-width: 8px;
 }
 
@@ -1139,4 +1139,44 @@ body {
   border-top: 1px solid #ddd;
   margin-top: 30px;
   height: 30px;
+}
+
+.videoThumbContainer {
+  width: 100px;
+  height: 50px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.videoThumb {
+  width: 94px;
+  height: 54px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #ccc;
+}
+
+.videoThumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.videoItem {
+  display: flex;
+  gap: 12px;
+}
+
+.videoTitle {
+  width: 110px;
+}
+
+.playlistContainer {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease-out;
+}
+
+.playlistContainer.open {
+  max-height: 200px;
 }

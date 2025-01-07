@@ -154,7 +154,7 @@ const Window = ({
         iframe.style.display = "none";
         setTimeout(() => {
           iframe.style.display = "block";
-        }, 50);
+        }, 500);
       }
 
       window.addEventListener("resize", handleResize);
@@ -314,7 +314,7 @@ const Window = ({
               case 12:
                 return <Dino />;
               case 13:
-                return <Video height={size.height} />;
+                return <Video />;
               case 14:
                 return <Tetris />;
               case 15:
