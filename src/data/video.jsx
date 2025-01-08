@@ -7,6 +7,10 @@ export const playlist = [
     id: 2,
     title: "Conferences",
   },
+  {
+    id: 3,
+    title: "Trailers",
+  },
 ];
 
 const video = [
@@ -79,6 +83,62 @@ const video = [
     thumb: "https://img.youtube.com/vi/wigvADvZGZg/default.jpg",
     url: "https://www.youtube.com/embed/wigvADvZGZg",
     idPlaylist: 1,
+  },
+  {
+    id: 11,
+    title: "The gladiator",
+    thumb: "https://img.youtube.com/vi/P5ieIbInFpg/default.jpg",
+    url: "https://www.youtube.com/embed/P5ieIbInFpg",
+    idPlaylist: 3,
+  },
+  {
+    id: 12,
+    title: "Braveheart",
+    thumb: "https://img.youtube.com/vi/nMft5QDOHek/default.jpg",
+    url: "https://www.youtube.com/embed/nMft5QDOHek",
+    idPlaylist: 3,
+  },
+  {
+    id: 13,
+    title: "The Lord of the Rings",
+    thumb: "https://img.youtube.com/vi/_nZdmwHrcnw/default.jpg",
+    url: "https://www.youtube.com/embed/_nZdmwHrcnw",
+    idPlaylist: 3,
+  },
+  {
+    id: 14,
+    title: "Matrix",
+    thumb: "https://img.youtube.com/vi/tGgCqGm_6Hs/default.jpg",
+    url: "https://www.youtube.com/embed/tGgCqGm_6Hs",
+    idPlaylist: 3,
+  },
+  {
+    id: 15,
+    title: "The Godfather",
+    thumb: "https://img.youtube.com/vi/Ew9ngL1GZvs/default.jpg",
+    url: "https://www.youtube.com/embed/Ew9ngL1GZvs",
+    idPlaylist: 3,
+  },
+  {
+    id: 16,
+    title: "Rocky",
+    thumb: "https://img.youtube.com/vi/-Hk-LYcavrw/default.jpg",
+    url: "https://www.youtube.com/embed/-Hk-LYcavrw",
+    idPlaylist: 3,
+  },
+  {
+    id: 17,
+    title: "Interstellar",
+    thumb: "https://img.youtube.com/vi/zSWdZVtXT7E/default.jpg",
+    url: "https://www.youtube.com/embed/zSWdZVtXT7E",
+    idPlaylist: 3,
+  },
+  {
+    id: 18,
+    title: "Nuovo Cinema Paradiso",
+    thumb: "https://img.youtube.com/vi/JMyVSD6OvO8/default.jpg",
+    url: "https://www.youtube.com/embed/JMyVSD6OvO8",
+    idPlaylist: 3,
   },
 ];
 

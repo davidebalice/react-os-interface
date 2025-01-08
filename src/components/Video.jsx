@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { RiPlayList2Fill } from "react-icons/ri";
 import { playlist, default as video } from "../data/video";
 
@@ -26,21 +27,30 @@ const Video = () => {
     <div className="videoContainer">
       <div style={{ height: `100%` }}>
         <ul style={{ height: `130%` }}>
-          <div>
-            <RiPlayList2Fill /> {selectedPlaylistTitle}
-            <div onClick={() => setPlaylistView(!playlistView)}>playlist</div>
-            
-            <div className={`playlistContainer ${playlistView ? "open" : ""}`}>
-              {playlist.map((item) => (
-                <li
-                  key={item.id}
-                  onClick={() => setSelectedPlaylist(item.id)}
-                  className="videoItem"
-                >
-                  <div className="videoTitle">{item.title}</div>
-                </li>
-              ))}
+          <div className="playlistBar">
+            <div className="playlistTitle">
+              <RiPlayList2Fill style={{fontSize:"18px"}} /> {selectedPlaylistTitle}
             </div>
+
+            <div
+              className="playlistButton"
+              onClick={() => setPlaylistView(!playlistView)}
+            >
+              {playlistView ? <MdKeyboardArrowUp className="playlistIcon" /> : <MdKeyboardArrowDown className="playlistIcon" />}
+              playlist
+            </div>
+          </div>
+
+          <div className={`playlistContainer ${playlistView ? "open" : ""}`}>
+            {playlist.map((item) => (
+              <li
+                key={item.id}
+                onClick={() => setSelectedPlaylist(item.id)}
+                className="videoItem"
+              >
+                <div className="videoTitle"> - {item.title}</div>
+              </li>
+            ))}
           </div>
 
           {video
@@ -57,7 +67,9 @@ const Video = () => {
                 <div className="videoThumb">
                   <img src={video.thumb} />
                 </div>
-                <div className="videoTitle">{video.title}</div>
+                <div className="videoTitle" style={{
+                  fontWeight: selectedVideo.id === video.id && "bold",
+                }}>{video.title}</div>
               </li>
             ))}
         </ul>
