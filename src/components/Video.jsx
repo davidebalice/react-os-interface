@@ -26,17 +26,22 @@ const Video = () => {
   return (
     <div className="videoContainer">
       <div style={{ height: `100%` }}>
-        <ul style={{ height: `130%` }}>
+        <ul style={{ height: `140%` }}>
           <div className="playlistBar">
             <div className="playlistTitle">
-              <RiPlayList2Fill style={{fontSize:"18px"}} /> {selectedPlaylistTitle}
+              <RiPlayList2Fill style={{ fontSize: "18px" }} />{" "}
+              {selectedPlaylistTitle}
             </div>
 
             <div
               className="playlistButton"
               onClick={() => setPlaylistView(!playlistView)}
             >
-              {playlistView ? <MdKeyboardArrowUp className="playlistIcon" /> : <MdKeyboardArrowDown className="playlistIcon" />}
+              {playlistView ? (
+                <MdKeyboardArrowUp className="playlistIcon" />
+              ) : (
+                <MdKeyboardArrowDown className="playlistIcon" />
+              )}
               playlist
             </div>
           </div>
@@ -67,9 +72,14 @@ const Video = () => {
                 <div className="videoThumb">
                   <img src={video.thumb} />
                 </div>
-                <div className="videoTitle" style={{
-                  fontWeight: selectedVideo.id === video.id && "bold",
-                }}>{video.title}</div>
+                <div
+                  className="videoTitle"
+                  style={{
+                    fontWeight: selectedVideo.id === video.id && "bold",
+                  }}
+                >
+                  {video.title}
+                </div>
               </li>
             ))}
         </ul>
